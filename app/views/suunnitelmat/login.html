@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>MediHome</h1>
+<!-- Kaikki lomakkeen elementit form-tagin sisään -->
+<form>
+    <!-- Tekstikenttä käyttäjätunnukselle -->
+    <div class="row">
+        <div class="form-group col-sm-2">
+            <label>Käyttäjätunnus</label>
+            <input class="form-control" type="text">
+        </div>
+    </div>
+    <!-- Salasanakenttä salasanalle -->
+    <div class="row">
+
+        <div class="form-group col-md-2">
+            <label>Salasana</label>
+            <input class="form-control" type="password">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
+</form>
+{% endblock %}

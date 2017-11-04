@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Potilaan Haapis etusivu</h1>
+<br/>
+
+<!--<p>
+    <a href="#" class ="btn btn-success">Luo hoitopyyntö</a>
+</p>-->
+
+<h2>Hoitopyyntösi</h2>
+<!-- Listataan voimassaolevia hoitopyyntöjä tässä -->
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Luontipäivä</th>
+            <th>Lääkäri</th>
+            <th>Kotikäynti</th>
+            <th>Käyntipäivä</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="#">1</a></td>
+            <td>30.10.2017</td>
+            <td>Pete Puoskari</td>
+            <td><label class="label label-danger">404</label></td>
+            <td></td>
+            <td><button type="submit" class="btn btn-default btn-link">Päivitä</button></td>
+            <td><button type="submit" class="btn btn-danger btn-sm">X</button></td>
+        </tr>
+        <tr>
+            <td><a href="#">2</a></td>
+            <td>1.11.2017</td>
+            <td>Valentino Rossi</td>
+            <td><label class="label label-success">200</label></td>
+            <td>2.11.2017</td>
+            <td><button type="submit" class="disabled btn btn-default btn-link">Päivitä</button>
+            <td><button type="submit" class="disabled btn btn-danger btn-sm">X</button>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Voimassaolevat hoito-ohjeet</h2>
+<table class="table table-condensed table-striped table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Luontipäivä</th>
+            <th>Lääkäri</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="#">2</a></td>
+            <td>4.11.2017</td>
+            <td>Valentino Rossi</td>
+            <td><button type="submit" class="btn btn-default btn-link">Lue</button></td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}
