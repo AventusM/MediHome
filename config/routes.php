@@ -12,10 +12,14 @@ $routes->get('/login', function () {
     HelloWorldController::login();
 });
 
-$routes->get('/potilaanSivu', function() {
+$routes->get('/potilas/1', function() {
     HelloWorldController::patientIndex();
 });
 
-$routes->get('/potilaanSivu/pyynto', function() {
+$routes->get('/potilas/pyynto/1', function() {
     HelloWorldController::patientHelpRequest();
+});
+
+$routes->get('/laakari/1', function() {
+//HelloWorldController::
 });
