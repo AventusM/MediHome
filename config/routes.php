@@ -16,10 +16,10 @@ $routes->get('/potilas/1', function() {
     HelloWorldController::patientIndex();
 });
 
-$routes->get('/potilas/pyynto/1', function() {
+$routes->get('/potilas/1/pyynto', function() {
     HelloWorldController::patientHelpRequest();
 });
 
 $routes->get('/laakari/1', function() {
-//HelloWorldController::
+    HelloWorldController::doctorIndex();
 });

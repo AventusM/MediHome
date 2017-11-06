@@ -24,4 +24,8 @@ class HelloWorldController extends BaseController {
         View::make('suunnitelmat/hoitoPyynto.html');
     }
 
+    public static function doctorIndex() {
+        View::make('suunnitelmat/laakarinSivu.html');
+    }
+
 }
