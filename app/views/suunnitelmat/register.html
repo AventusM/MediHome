@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>MediHome</h1>
+<!-- Kaikki lomakkeen elementit form-tagin sisään -->
+<form class="inputFieldCustomWidth">
+
+    <div class="form-group">
+        <label>Etunimi</label>
+        <input class="form-control" type="text">
+    </div>
+
+    <div class="form-group">
+        <label>Sukunimi</label>
+        <input class="form-control" type="password">
+    </div>
+
+    <div class="form-group">
+        <label>Henkilötunnus</label>
+        <input class="form-control" type="password">
+    </div>
+
+    <div class="form-group">
+        <label>Haluttu käyttäjätunnus</label>
+        <input class="form-control" type="password">
+    </div>
+
+    <div class="form-group">
+        <label>Salasana</label>
+        <input class="form-control" type="password">
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-xs">Rekisteröidy</button>
+</form>
+{% endblock %}

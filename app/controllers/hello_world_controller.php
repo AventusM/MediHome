@@ -7,25 +7,38 @@ class HelloWorldController extends BaseController {
         View::make('suunnitelmat/login.html');
     }
 
-    public static function sandbox() {
-        // Testaa koodiasi täällä
-        View::make('login.html');
-    }
+//
+//    public static function sandbox() {
+//        // Testaa koodiasi täällä
+//        View::make('login.html');
+//    }
 
     public static function login() {
         View::make('suunnitelmat/login.html');
     }
 
+    public static function register() {
+        View::make('suunnitelmat/register.html');
+    }
+
     public static function patientIndex() {
-        View::make('suunnitelmat/potilaanSivu.html');
+        View::make('suunnitelmat/potilaanetusivu.html');
     }
 
     public static function patientHelpRequest() {
-        View::make('suunnitelmat/hoitoPyynto.html');
+        View::make('suunnitelmat/hoitopyynto.html');
     }
 
     public static function doctorIndex() {
-        View::make('suunnitelmat/laakarinSivu.html');
+        View::make('suunnitelmat/laakarinetusivu.html');
+    }
+
+    public static function doctorReport() {
+        View::make('suunnitelmat/laakarinraportti');
+    }
+
+    public static function getInstruction() {
+        View::make('suunnitelmat/hoidonohjeistus.html');
     }
 
 }

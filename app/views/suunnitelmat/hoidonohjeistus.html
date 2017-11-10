@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Hoito-ohje</h2>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>HoitoId</th>
+            <th>Lääkäri</th>
+            <th>Potilas</th>
+            <th>Hoito-ohje luotu</th>
+            <th>Viimeisin muokkaus</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>50</td>
+            <td>Viktor Moroz</td>
+            <td>Anton Moroz</td>
+            <td>4.11.2017</td>
+            <td>7.11.2017</td>
+            <td><button type="submit" class="btn btn-default btn-xs">Muokkaa  </button>
+                <button type="submit" class="btn btn-danger btn-xs">X</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+
+{% endblock %}
