@@ -1,5 +1,7 @@
 <?php
 
+//require 'app/models/Hoitopyynto.php';
+
 class HelloWorldController extends BaseController {
 
     public static function index() {
@@ -7,11 +9,14 @@ class HelloWorldController extends BaseController {
         View::make('suunnitelmat/login.html');
     }
 
-//
-//    public static function sandbox() {
-//        // Testaa koodiasi täällä
-//        View::make('login.html');
-//    }
+    public static function sandbox() {
+        $antoninPyynto = Hoitopyynto::find(1);
+        $kaikkiPyynnot = Hoitopyynto::all();
+        
+        Kint::dump($antoninPyynto);
+        Kint::dump($kaikkiPyynnot);
+                
+    }
 
     public static function login() {
         View::make('suunnitelmat/login.html');

@@ -1,33 +1,39 @@
 <?php
 
-$routes->get('/', function() {
-    HelloWorldController::index();
-});
-
-//$routes->get('/hiekkalaatikko', function() {
-//    HelloWorldController::sandbox();
+//$routes->get('/', function() {
+//    HelloWorldController::index();
 //});
 
-$routes->get('/login', function () {
-    HelloWorldController::login();
+$routes->get('/hiekkalaatikko', function() {
+    HelloWorldController::sandbox();
 });
 
-$routes->get('/register', function() {
-    HelloWorldController::register();
+//$routes->get('/login', function () {
+//    HelloWorldController::login();
+//});
+//
+//$routes->get('/register', function() {
+//    HelloWorldController::register();
+//});
+
+$routes->get('/potilas', function() {
+    PotilasController::index();
 });
 
-$routes->get('/potilas/1', function() {
-    HelloWorldController::patientIndex();
+$routes->get('/potilas/new', function() {
+    PotilasController::createOrder();
 });
 
-$routes->get('/potilas/1/luohoito', function() {
-    HelloWorldController::patientHelpRequest();
-});
 
-$routes->get('/laakari/1', function() {
-    HelloWorldController::doctorIndex();
-});
+//$routes->get('/laakari', function() {
+//    HelloWorldController::doctorIndex();
+//});
+//
+//$routes->get('/hoitoohje/50', function() {
+//    HelloWorldController::getInstruction();
+//});
+// POST
 
-$routes->get('/hoitoohje/50', function() {
-    HelloWorldController::getInstruction();
+$routes->post('potilas/new', function() {
+    PotilasController::store();
 });

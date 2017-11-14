@@ -1,6 +1,6 @@
 {% extends "patientBase.html" %}
 {% block content %}
-<h1>Potilaan Anton Moroz etusivu</h1>
+<h1>Potilaan Etunimi Sukunimi etusivu</h1>
 <br/>
 
 <h2>Hoitopyyntösi</h2>
@@ -8,19 +8,29 @@
 <table class="table table-striped table-hover">
     <thead>
         <tr>
-            <th>ID</th>
             <th>Pyynnön luontipäivä</th>
             <th>Lääkäri</th>
-            <th>Kotikäynti</th>
-            <th></th>
-            <th></th>
+            <th>Kotikäynti suoritettu</th>
+            <th>Peru</th>
         </tr>
     </thead>
     <tbody>
-
+        {% for pyynto in pyynnot %}
+        <tr>
+            <td>{{pyynto.luontipvm}}</td>
+            <td>{{pyynto.laakari_id}}</td>
+            <td>{{pyynto.kayntipvm}}</td>
+            {% if pyynto.kayntipvm %}
+            <td><a class="disabled btn btn-danger btn-xs" href="#">X</a></td>
+            {% else %}
+            <td><a class="btn btn-danger btn-xs" href="#">X</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
     </tbody>
 </table>
-<br/>
+
+<!--<br/>
 <h2>Voimassaolevat hoito-ohjeet</h2>
 <table class="table table-condensed table-striped table-hover">
     <thead>
@@ -39,6 +49,6 @@
             <td><button type="submit" class="btn btn-default btn-link btn-xs">Lue</button></td>
         </tr>
     </tbody>
-</table>
+</table>-->
 
 {% endblock %}

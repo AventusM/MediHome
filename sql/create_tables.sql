@@ -21,6 +21,7 @@ CREATE TABLE Hoitopyynto(
 id SERIAL PRIMARY KEY,
 potilas_id INTEGER REFERENCES Potilas(id),
 laakari_id INTEGER REFERENCES Laakari(id),
+luontipvm date,
 kayntipvm date,
 raportti varchar
 );
