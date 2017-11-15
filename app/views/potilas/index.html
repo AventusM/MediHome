@@ -8,23 +8,30 @@
 <table class="table table-striped table-hover">
     <thead>
         <tr>
-            <th>Pyynnön luontipäivä</th>
+            <th>Pyynti luotu</th>
             <th>Lääkäri</th>
-            <th>Kotikäynti suoritettu</th>
+            <th>Kotikäynti</th>
+            <th class="text-right">Pyyntöasetukset</th>
             <th>Peru</th>
         </tr>
     </thead>
     <tbody>
         {% for pyynto in pyynnot %}
         <tr>
-            <td>{{pyynto.luontipvm}}</td>
+            <td><label class="label label-success">{{pyynto.luontipvm}}</label></td>
             <td>{{pyynto.laakari_id}}</td>
-            <td>{{pyynto.kayntipvm}}</td>
+            
             {% if pyynto.kayntipvm %}
+            <td><label class="label label-success">{{pyynto.kayntipvm}}</label></td>
+            <td class="text-right"><a class="disabled btn-default btn btn-xs" href="#">Päivitä</a></td>
             <td><a class="disabled btn btn-danger btn-xs" href="#">X</a></td>
+            
             {% else %}
+            <td><label class="label label-danger">Odottaa Lääkärin hyväksyntää</label></td>
+            <td class="text-right"><a class="btn btn-default btn-xs" href="#">Päivitä</a></td>
             <td><a class="btn btn-danger btn-xs" href="#">X</a></td>
             {% endif %}
+        
         </tr>
         {% endfor %}
     </tbody>

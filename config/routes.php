@@ -4,7 +4,7 @@
 //    HelloWorldController::index();
 //});
 
-$routes->get('/hiekkalaatikko', function() {
+$routes->get('/hiekkalaatikko/', function() {
     HelloWorldController::sandbox();
 });
 
@@ -16,24 +16,18 @@ $routes->get('/hiekkalaatikko', function() {
 //    HelloWorldController::register();
 //});
 
-$routes->get('/potilas', function() {
+
+$routes->get('/potilas/', function() {
     PotilasController::index();
 });
 
-$routes->get('/potilas/new', function() {
+$routes->get('/potilas/new/', function() {
     PotilasController::createOrder();
 });
 
-
-//$routes->get('/laakari', function() {
-//    HelloWorldController::doctorIndex();
-//});
-//
-//$routes->get('/hoitoohje/50', function() {
-//    HelloWorldController::getInstruction();
-//});
+// POST
 // POST
 
-$routes->post('potilas/new', function() {
+$routes->post('/potilas/new', function() {
     PotilasController::store();
 });

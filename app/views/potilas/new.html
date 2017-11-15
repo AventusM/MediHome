@@ -1,11 +1,12 @@
 {% extends "patientBase.html" %}
 {% block content %}
 <h2>Kuvaile havaitsemiasi oireita lyhyesti</h2>
-<form method="post" action="{{base_path}}/potilas">
+<form method="post" action="{{base_path}}/potilas/new">
     <div class="form-group">
-        <textarea rows="4" cols="50" placeholder="Kurkkukipu, sydänvaivat, psyykkiset oireet..."></textarea>
+        <textarea name="oireet" rows="4" cols="50" placeholder="Kurkkukipu, sydänvaivat, psyykkiset oireet..."></textarea>
     </div>
-    <button type="submit" class="btn btn-xs">Peru</button>
+    <!--    <a href="index.html"><button type="submit" class="btn btn-xs">Peru</button></a>-->
     <button type="submit" class="btn btn-success btn-xs">Lähetä</button>
 </form>
+<a class="button-wrapper" href="{{base_path}}/potilas"><button type="submit" class="btn btn-xs">&ensp;Peru&ensp;</button></a>
 {% endblock %}

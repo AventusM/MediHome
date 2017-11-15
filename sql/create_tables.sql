@@ -23,6 +23,7 @@ potilas_id INTEGER REFERENCES Potilas(id),
 laakari_id INTEGER REFERENCES Laakari(id),
 luontipvm date,
 kayntipvm date,
+oireet varchar,
 raportti varchar
 );
 

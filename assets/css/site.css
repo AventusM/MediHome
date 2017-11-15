@@ -16,3 +16,7 @@
 .inputFieldCustomWidth {
     width: 300px;
 }
+
+.button-wrapper .btn{
+    margin-top: 5px;
+}
