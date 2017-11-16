@@ -5,37 +5,40 @@
 
 <h2>Hoitopyyntösi</h2>
 <!-- Listataan voimassaolevia hoitopyyntöjä tässä -->
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th>Pyynti luotu</th>
-            <th>Lääkäri</th>
-            <th>Kotikäynti</th>
-            <th class="text-right">Pyyntöasetukset</th>
-            <th>Peru</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for pyynto in pyynnot %}
-        <tr>
-            <td><label class="label label-success">{{pyynto.luontipvm}}</label></td>
-            <td>{{pyynto.laakari_id}}</td>
-            
-            {% if pyynto.kayntipvm %}
-            <td><label class="label label-success">{{pyynto.kayntipvm}}</label></td>
-            <td class="text-right"><a class="disabled btn-default btn btn-xs" href="#">Päivitä</a></td>
-            <td><a class="disabled btn btn-danger btn-xs" href="#">X</a></td>
-            
-            {% else %}
-            <td><label class="label label-danger">Odottaa Lääkärin hyväksyntää</label></td>
-            <td class="text-right"><a class="btn btn-default btn-xs" href="#">Päivitä</a></td>
-            <td><a class="btn btn-danger btn-xs" href="#">X</a></td>
-            {% endif %}
-        
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<form method="POST" action="{{base_path}}/potilas">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Pyynti luotu</th>
+                <th>Lääkäri</th>
+                <th>Kotikäynti</th>
+                <th class="text-right">Pyyntöasetukset</th>
+                <th>Peru</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pyynto in pyynnot %}
+            <tr>
+                <td><label class="label label-success">{{pyynto.luontipvm}}</label></td>
+                <td>{{pyynto.laakari_id}}</td>
+
+                {% if pyynto.kayntipvm %}
+                <td><label class="label label-success">{{pyynto.kayntipvm}}</label></td>
+                <td class="text-right"><button class="disabled btn-default btn btn-xs" href="#">Päivitä</button></td>
+                <td><button class="disabled btn-danger btn btn-xs" href="#">X</button></td>
+
+                {% else %}
+                <td><label class="label label-danger">Odottaa Lääkärin hyväksyntää</label></td>
+                <!--Päivittäminen 4. viikon asioita-->
+                <td class="text-right"><button class="btn-default btn btn-xs" href="{{base_path}}/potilas/hoitopyynto/{{pyynto.id}}">Päivitä</button></td>
+                <td><button class="btn-danger btn btn-xs" href="#">X</button></td>
+                {% endif %}
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</form>
 
 <!--<br/>
 <h2>Voimassaolevat hoito-ohjeet</h2>
