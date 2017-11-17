@@ -9,22 +9,13 @@ class PotilasController extends BaseController {
         //TODO - lääkärin hoito-ohjeiden listaaminen . . .
     }
 
-    public static function updateOrder() {
-        $params = $_POST;
-//        $id = $params . . .
-//        $haettuHoitoPyynto = Hoitopyynto::find($id);
-        $haettuHoitoPyynto = Hoitopyynto::find(2);
-        $yhdenHoitoPyynnonTaulu = array($haettuHoitoPyynto);
-        View::make('potilas/edit.html', array('pyynto' => $yhdenHoitoPyynnonTaulu));
-    }
-
     public static function createOrder() {
         View::make('potilas/new.html');
     }
 
-//    4. viikon juttuja
-    public static function update() {
-        //Hyvin samanlainen kuin store() -> pyyntö päivitetään
+    public static function viewOrder($id) {
+        $hoitopyynto = Hoitopyynto::find($id);
+        View::make('potilas/edit.html', array('pyynto' => $hoitopyynto));
     }
 
     public static function store() {

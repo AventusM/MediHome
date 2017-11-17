@@ -5,38 +5,38 @@
 
 <h2>Hoitopyyntösi</h2>
 <!-- Listataan voimassaolevia hoitopyyntöjä tässä -->
-<form method="POST" action="{{base_path}}/potilas">
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th>Pyynti luotu</th>
-                <th>Lääkäri</th>
-                <th>Kotikäynti</th>
-                <th class="text-right">Pyyntöasetukset</th>
-                <th>Peru</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for pyynto in pyynnot %}
-            <tr>
-                <td><label class="label label-success">{{pyynto.luontipvm}}</label></td>
-                <td>{{pyynto.laakari_id}}</td>
-                {% if pyynto.kayntipvm %}
-                <td><label class="label label-success">{{pyynto.kayntipvm}}</label></td>
-                <td></td>
-                <td></td>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Pyynti luotu</th>
+            <th>Lääkäri</th>
+            <th>Kotikäynti</th>
+            <th class="text-right">Pyyntöasetukset</th>
+            <th>Peru</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pyynto in pyynnot %}
+        <tr>
+            <td>{{pyynto.id}}</td>
+            <td><label class="label label-success">{{pyynto.luontipvm}}</label></td>
+            <td>{{pyynto.laakari_id}}</td>
+            {% if pyynto.kayntipvm %}
+            <td><label class="label label-success">{{pyynto.kayntipvm}}</label></td>
+            <td></td>
+            <td></td>
 
-                {% else %}
-                <td><label class="label label-danger">Odottaa Lääkärin hyväksyntää</label></td>
-                <td class="text-right"><button type="submit" class="btn-default btn btn-xs">Päivitä</button></td>
-                <td><button class="btn-danger btn btn-xs" href="#">X</button></td>
-                {% endif %}
+            {% else %}
+            <td><label class="label label-danger">Odottaa Lääkärin hyväksyntää</label></td>
+            <td class="text-right"><a class="btn-default btn btn-xs" href="{{base_path}}/potilas/hoitopyynto/{{pyynto.id}}">Päivitä</td>
+            <td><button class="btn-danger btn btn-xs" href="#">X</button></td>
+            {% endif %}
 
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</form>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 <!--<br/>
 <h2>Voimassaolevat hoito-ohjeet</h2>
@@ -58,5 +58,4 @@
         </tr>
     </tbody>
 </table>-->
-
 {% endblock %}

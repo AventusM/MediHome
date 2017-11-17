@@ -16,6 +16,10 @@ $routes->get('/potilas/new/', function() {
     PotilasController::createOrder();
 });
 
+$routes->get('/potilas/hoitopyynto/:id', function($id) {
+    PotilasController::viewOrder($id);
+});
+
 // POST
 // POST
 
@@ -23,6 +27,6 @@ $routes->post('/potilas/new', function() {
     PotilasController::store();
 });
 
-$routes->post('/potilas/', function() {
-    PotilasController::updateOrder();
-});
+//$routes->post('/potilas/', function() {
+//    PotilasController::updateOrder();
+//});

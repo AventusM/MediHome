@@ -3,9 +3,8 @@
 <h2>Muokkaa aiemmin luomaasi hoitopyyntöä</h2>
 <form method="post" action="{{base_path}}/potilas/edit">
     <div class="form-group">
-        {% for pyynto in pyynto %} <!-- yksi pyyntö -->
-        <textarea name="oireet" rows="4" cols="50">{{pyynto.oireet}}</textarea>
-        {% endfor %}
+        <label>Oireet</label><br>
+        <textarea rows="4" cols="50" >{{pyynto.oireet}}</textarea>
     </div>
     <button type="submit" class="btn btn-success btn-xs">Päivitä</button>
 </form>
