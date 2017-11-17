@@ -47,7 +47,7 @@ class Hoitopyynto extends BaseModel {
             ));
             return $pyynto;
         }
-        return null;
+//        return null;
     }
 
     public function save() {
