@@ -11,21 +11,8 @@ Yleisiä linkkejä:
 [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Laakarin_kotikaynnit.html) 
 
 
-## Viikon 2 linkkejä staattisiin nettisivuihin
+## Viikon 3 linkkejä koodikatselmoijalle!
 
-Oikea linkitystapa vielä opittava. Katsotaan olisiko ensi viikon materiaalista opettamaan tätä asiaa!
+Viikon ehdot täyttävä tietokohde oli hoitopyyntö. Eli potilas voi luoda uusia hoitopyyntöjä navigaatiopalkin kautta. Pyyntöjä voi toistaiseksi tarkastella 'päivitä'-nappia painamalla.
 
-Navbar päivitettävä ensi viikolla. Tämänviikkoinen bandaid-fix ei ole millään tavalla skaalautuva
-Päivitettävät - kirjautuminen
-              - rekisteröityminen
-
-Kirjautuminen - http://amoroz.users.cs.helsinki.fi/antonintietokantasovellus/login
-Rekisteröityminen - http://amoroz.users.cs.helsinki.fi/antonintietokantasovellus/register
-
-Potilas
-Etusivu - http://amoroz.users.cs.helsinki.fi/antonintietokantasovellus/potilas/1
-Hoitopyyntö http://amoroz.users.cs.helsinki.fi/antonintietokantasovellus/potilas/1/luohoito 
-
-Lääkäri
-Etusivu - http://amoroz.users.cs.helsinki.fi/antonintietokantasovellus/laakari/1
-Hoito-ohje - http://amoroz.users.cs.helsinki.fi/antonintietokantasovellus/hoitoohje/50
+[Linkki toimivaan osaan sovelluksesta](http://amoroz.users.cs.helsinki.fi/antonintietokantasovellus/potilas)
