@@ -9,7 +9,7 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Pyynti luotu</th>
+            <th>Viimeksi muokattu</th>
             <th>Lääkäri</th>
             <th>Kotikäynti</th>
             <th class="text-right">Pyyntöasetukset</th>
@@ -19,7 +19,7 @@
     <tbody>
         {% for pyynto in pyynnot %}
         <tr>
-            <td>{{pyynto.id}}</td>
+            <td name="id">{{pyynto.id}}</td>
             <td><label class="label label-success">{{pyynto.luontipvm}}</label></td>
             <td>{{pyynto.laakari_id}}</td>
             {% if pyynto.kayntipvm %}
@@ -29,8 +29,8 @@
 
             {% else %}
             <td><label class="label label-danger">Odottaa Lääkärin hyväksyntää</label></td>
-            <td class="text-right"><a class="btn-default btn btn-xs" href="{{base_path}}/potilas/hoitopyynto/{{pyynto.id}}">Päivitä</td>
-            <td><button class="btn-danger btn btn-xs" href="#">X</button></td>
+            <td class="text-right"><a class="btn-default btn btn-xs" href="{{base_path}}/potilas/hoitopyynto/{{pyynto.id}}">Päivitä</a></td>
+            <td><a class="btn-danger btn btn-xs" href="{{base_path}}/potilas/hoitopyynto/{{pyynto.id}}/destroy">X</a></td>
             {% endif %}
 
         </tr>

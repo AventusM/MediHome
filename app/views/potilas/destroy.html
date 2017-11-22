@@ -1,0 +1,8 @@
+{% extends "patientBase.html" %}
+{% block content %}
+<h2>Varmista hoitopyynnön poisto</h2><hr>
+<form method="post" action="{{base_path}}/potilas/hoitopyynto/{{pyynto.id}}/destroy">
+    <button type="submit" class="btn btn-danger btn-xs">Poista</button>
+</form>
+<a class="button-wrapper" href="{{base_path}}/potilas"><button type="submit" class="btn btn-xs">&ensp;Peru</button></a>
+{% endblock %}

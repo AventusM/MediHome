@@ -2,16 +2,18 @@
 
 class Hoitopyynto extends BaseModel {
 
-    //Tauluattribuutit (huom. kaikki avaimet)
     public $id, $potilas_id, $laakari_id, $luontipvm, $kayntipvm, $oireet, $raportti;
 
-    //Konstruktori
     public function __construct($attributes) {
         parent::__construct($attributes);
     }
 
+    /*
+     * HUOM ORDER BY ID
+     */
+
     public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Hoitopyynto');
+        $query = DB::connection()->prepare('SELECT * FROM Hoitopyynto ORDER BY id');
         $query->execute();
         $rows = $query->fetchAll();
         $pyynnot = array();
@@ -47,7 +49,7 @@ class Hoitopyynto extends BaseModel {
             ));
             return $pyynto;
         }
-//        return null;
+        return null;
     }
 
     public function save() {
@@ -57,6 +59,16 @@ class Hoitopyynto extends BaseModel {
         //Ei ole automaattista primary keyn lisäystä...?
         $row = $query->fetch();
         $this->id = $row['id'];
+    }
+
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Hoitopyynto SET oireet=:oireet WHERE id=:id');
+        $query->execute(array('id' => $this->id, 'oireet' => $this->oireet));
+    }
+
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Hoitopyynto WHERE id=:id');
+        $query->execute(array('id' => $this->id));
     }
 
 }

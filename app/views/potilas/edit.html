@@ -1,10 +1,10 @@
 {% extends "patientBase.html" %}
 {% block content %}
-<h2>Muokkaa aiemmin luomaasi hoitopyyntöä</h2>
-<form method="post" action="{{base_path}}/potilas/edit">
+<h2>Muokkaa aiemmin luomaasi hoitopyyntöä</h2><hr>
+<form method="post" action="{{base_path}}/potilas/hoitopyynto/{{pyynto.id}}">
     <div class="form-group">
-        <label>Oireet</label><br>
-        <textarea rows="4" cols="50" >{{pyynto.oireet}}</textarea>
+        <label>{{pyynto.oireet}}</label><br><br><hr>
+        <textarea rows="4" cols="50" name="oireet"></textarea>
     </div>
     <button type="submit" class="btn btn-success btn-xs">Päivitä</button>
 </form>
