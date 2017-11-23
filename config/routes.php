@@ -24,8 +24,8 @@ $routes->get('/potilas/hoitopyynto/:id/destroy', function($id) {
     PotilasController::destroyThisOrder($id);
 });
 
-$routes->get('/potilaslogin', function() {
-    PotilasController::login();
+$routes->get('/login', function() {
+    UserController::login();
 });
 
 // POST
@@ -43,6 +43,6 @@ $routes->post('/potilas/hoitopyynto/:id/destroy', function($id) {
     PotilasController::destroy($id);
 });
 
-$routes->post('/potilaslogin', function() {
-    PotilasController::handle_login();
+$routes->post('/login', function() {
+    UserController::handle_login();
 });

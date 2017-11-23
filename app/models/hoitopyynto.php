@@ -8,13 +8,9 @@ class Hoitopyynto extends BaseModel {
         parent::__construct($attributes);
     }
 
-    /*
-     * HUOM ORDER BY ID
-     */
-
-    public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Hoitopyynto ORDER BY id');
-        $query->execute();
+    public static function allForPatient($inputPotilasID) {
+        $query = DB::connection()->prepare('SELECT * FROM Hoitopyynto WHERE potilas_id=:potilas_id');
+        $query->execute(array('potilas_id' => $inputPotilasID));
         $rows = $query->fetchAll();
         $pyynnot = array();
 

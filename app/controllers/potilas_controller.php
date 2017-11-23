@@ -1,30 +1,11 @@
 <?php
 
 class PotilasController extends BaseController {
-    /*
-     * HOITOPYYNNÖT TOISTAISEKSI JÄRJESTETTY ID:N MUKAAN
-     */
-
-    public static function login() {
-        View::make('potilas/login.html');
-    }
-
-    public static function handle_login() {
-        $params = $_POST;
-        $potilas = Potilas::authenticate($params['kayttajanimi'], $params['salasana']);
-        if (!$potilas) {
-            View::make('potilas/login.html', array('error' => 'Väärä käyttäjätunnus tai salasana!'));
-        } else {
-            $_SESSION['potilas'] = $potilas->id;
-            Redirect::to('/potilas', array('message' => 'Tervetuloa takaisin ' . $potilas->etunimi));
-        }
-    }
 
     public static function index() {
-        //TODO - toteutettava findAllForPatient($id) - tyylinen metodi. Allaoleva all() tms. menee lääkäreille
-        $omatHoitopyynnot = Hoitopyynto::all(); // all - metodi tarvitsee parametriksi $id:n
+        $potilasID = $_SESSION;
+        $omatHoitopyynnot = Hoitopyynto::allForPatient($potilasID); // all - metodi tarvitsee parametriksi $id:n?
         View::make('potilas/index.html', array('pyynnot' => $omatHoitopyynnot));
-        //TODO - lääkärin hoito-ohjeiden listaaminen . . .
     }
 
     public static function createOrder() {

@@ -2,17 +2,17 @@
 {% block content %}
 <h1>MediHome</h1>
 <!-- Kaikki lomakkeen elementit form-tagin sisään -->
-<form class="inputFieldCustomWidth">
+<form method="POST" action="{{base_path}}/login" class="inputFieldCustomWidth">
     <!-- Tekstikenttä käyttäjätunnukselle -->
     <div class="form-group">
         <label>Käyttäjätunnus</label>
-        <input name="kayttajanimi" class="form-control" type="text">
+        <input name="username" value="{{username}}" class="form-control" type="text">
     </div>
 
     <!-- Salasanakenttä salasanalle -->
     <div class="form-group">
         <label>Salasana</label>
-        <input name="salasana" class="form-control" type="password">
+        <input name="password" class="form-control" type="password">
     </div>
     <p>Uusi käyttäjä? <a href="#">rekisteröidy</a></p>
     <button type="submit" class="btn btn-primary btn-xs">Kirjaudu</button>
