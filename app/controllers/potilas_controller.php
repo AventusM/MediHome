@@ -2,9 +2,12 @@
 
 class PotilasController extends BaseController {
 
+    public static function getCurrentPatientID() {
+        return $_SESSION['potilas'];
+    }
+
     public static function index() {
-        $potilasID = $_SESSION['potilas'];
-        $omatHoitopyynnot = Hoitopyynto::allForPatient($potilasID); // all - metodi tarvitsee parametriksi $id:n?
+        $omatHoitopyynnot = Hoitopyynto::findAllForPatient(self::getCurrentPatientID());
         View::make('potilas/index.html', array('pyynnot' => $omatHoitopyynnot));
     }
 
@@ -23,10 +26,9 @@ class PotilasController extends BaseController {
     }
 
     public static function store() {
-        $potilasID = $_SESSION['potilas'];
         $params = $_POST;
         $pyynto = new Hoitopyynto(array(
-            'potilas_id' => $potilasID,
+            'potilas_id' => self::getCurrentPatientID(),
             'laakari_id' => null,
             'luontipvm' => date("Y-m-d"),
             'kayntipvm' => null,
@@ -39,11 +41,10 @@ class PotilasController extends BaseController {
     }
 
     public static function update($id) {
-        $potilasID = $_SESSION['potilas'];
         $params = $_POST;
         $attributes = array(
             'id' => $id,
-            'potilas_id' => $potilasID,
+            'potilas_id' => self::getCurrentPatientID(),
             'laakari_id' => null,
             'luontipvm' => date("Y-m-d"),
             'kayntipvm' => null,

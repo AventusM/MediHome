@@ -8,7 +8,7 @@ class Hoitopyynto extends BaseModel {
         parent::__construct($attributes);
     }
 
-    public static function allForPatient($inputPotilasID) {
+    public static function findAllForPatient($inputPotilasID) {
         $query = DB::connection()->prepare('SELECT * FROM Hoitopyynto WHERE potilas_id=:potilas_id');
         $query->execute(array('potilas_id' => $inputPotilasID));
         $rows = $query->fetchAll();

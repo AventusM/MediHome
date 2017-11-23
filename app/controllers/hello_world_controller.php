@@ -11,7 +11,7 @@ class HelloWorldController extends BaseController {
 
     public static function sandbox() {
         $antoninPyynto = Hoitopyynto::find(1);
-        $kaikkiPyynnot = Hoitopyynto::allForPatient();
+        $kaikkiPyynnot = Hoitopyynto::findAllForPatient();
         
         Kint::dump($antoninPyynto);
         Kint::dump($kaikkiPyynnot);
