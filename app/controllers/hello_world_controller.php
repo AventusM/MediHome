@@ -10,12 +10,18 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
-        $antoninPyynto = Hoitopyynto::find(1);
-        $kaikkiPyynnot = Hoitopyynto::findAllForPatient();
-        
-        Kint::dump($antoninPyynto);
-        Kint::dump($kaikkiPyynnot);
-                
+        $pyynto = new Hoitopyynto(array(
+            'id' => 20,
+            'potilas_id' => 1,
+            'laakari_id' => 1,
+            'luontipvm' => null,
+            'kayntipvm' => null,
+            'oireet' => 'ASD',
+            'rapotti' => null
+        ));
+        $errors = $pyynto->validate_request($pyynto->oireet);
+        Kint::dump($pyynto);
+        Kint::dump($errors);
     }
 
     public static function login() {

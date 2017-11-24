@@ -6,6 +6,11 @@ class Hoitopyynto extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_request');
+    }
+
+    public function validate_request($paramOireet) {
+        return parent::validate_request($paramOireet);
     }
 
     public static function findAllForPatient($inputPotilasID) {

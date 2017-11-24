@@ -8,6 +8,10 @@ class Potilas extends BaseModel {
         parent::__construct($attributes);
     }
 
+//    public function validate_username() {
+//        parent::validate_username($this->username);
+//    }
+
     public static function authenticate($inputUsr, $inputPwd) {
         $query = DB::connection()->prepare('SELECT * FROM Potilas WHERE username=:user AND pass=:pwd LIMIT 1');
         $query->execute(array('user' => $inputUsr, 'pwd' => $inputPwd));

@@ -15,7 +15,7 @@ class UserController extends BaseController {
         } else {
             $_SESSION['potilas'] = $potilas->id;
             UserController::get_potilas_logged_in();
-            Redirect::to('/potilas', array('potilasid' => $potilas->id, 'etunimi' => $potilas->etunimi, 'sukunimi' => $potilas->sukunimi));
+            Redirect::to('/potilas');
         }
     }
 

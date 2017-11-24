@@ -8,7 +8,8 @@ class PotilasController extends BaseController {
 
     public static function index() {
         $omatHoitopyynnot = Hoitopyynto::findAllForPatient(self::getCurrentPatientID());
-        View::make('potilas/index.html', array('pyynnot' => $omatHoitopyynnot));
+        $potilas = Potilas::find(self::getCurrentPatientID());
+        View::make('potilas/index.html', array('pyynnot' => $omatHoitopyynnot, 'etunimi' => $potilas->etunimi, 'sukunimi' => $potilas->sukunimi));
     }
 
     public static function createOrder() {
@@ -35,9 +36,13 @@ class PotilasController extends BaseController {
             'oireet' => $params['oireet'],
             'raportti' => null
         ));
-
-        $pyynto->save();
-        Redirect::to('/potilas');
+        $errors = $pyynto->validate_request($pyynto->oireet);
+        if (count($errors) == 0) {
+            $pyynto->save();
+            Redirect::to('/potilas');
+        } else {
+            View::make('potilas/new.html', array('errors' => $errors));
+        }
     }
 
     public static function update($id) {
@@ -52,8 +57,15 @@ class PotilasController extends BaseController {
             'raportti' => null
         );
         $paivitettavaHoitopyynto = new Hoitopyynto($attributes);
-        $paivitettavaHoitopyynto->update();
-        Redirect::to('/potilas');
+        $errors = $paivitettavaHoitopyynto->validate_request($paivitettavaHoitopyynto->oireet);
+        if (count($errors) == 0) {
+            $paivitettavaHoitopyynto->update();
+            Redirect::to('/potilas');
+        } else {
+            //Joudutaan hakemaan hoitopyyntö erikseen -> muuten placeholderit tms. elementtien sisällöt katoavat kokonaan
+            $hoitopyynto = Hoitopyynto::find($paivitettavaHoitopyynto->id);
+            View::make('potilas/edit.html', array('errors' => $errors, 'pyynto' => $hoitopyynto));
+        }
     }
 
     public static function destroy($id) {
