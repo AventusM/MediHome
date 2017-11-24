@@ -14,4 +14,5 @@ Yleisiä linkkejä:
 ## Viikon 4 käyttäjätunnuksia
 
 Käyttäjänimi: AntonM Salasana : test  
-Käyttäjänimi: GeirS  Salasana :test  [linkki kirjautumiseen](http://amoroz.users.cs.helsinki.fi/antonintietokantasovellus/login)
+Käyttäjänimi: GeirS  Salasana : test  
+[linkki kirjautumiseen](http://amoroz.users.cs.helsinki.fi/antonintietokantasovellus/login)
