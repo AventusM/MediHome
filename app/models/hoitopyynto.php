@@ -13,6 +13,10 @@ class Hoitopyynto extends BaseModel {
         return parent::validate_request($paramOireet);
     }
 
+    public static function indexBoundsCheck($potilasID, $hoitopyyntoID) {
+        return $potilasID === $hoitopyyntoID;
+    }
+
     public static function findAllForPatient($inputPotilasID) {
         $query = DB::connection()->prepare('SELECT * FROM Hoitopyynto WHERE potilas_id=:potilas_id');
         $query->execute(array('potilas_id' => $inputPotilasID));

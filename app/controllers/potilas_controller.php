@@ -17,9 +17,20 @@ class PotilasController extends BaseController {
         View::make('potilas/new.html');
     }
 
+    //Metodia muutettu 5. viikolla -> halutaan
+    //varmistaa ettei päästä käsiksi toisten
+    //hoitopyyntöihin tms.
     public static function viewOrder($id) {
-        $hoitopyynto = Hoitopyynto::find($id);
-        View::make('potilas/edit.html', array('pyynto' => $hoitopyynto));
+        if (Hoitopyynto::find($id) != null) {
+            $hoitopyynto = Hoitopyynto::find($id);
+            $idMatch = Hoitopyynto::indexBoundsCheck(self::getCurrentPatientID(), $hoitopyynto->potilas_id);
+            if ($idMatch) {
+                View::make('potilas/edit.html', array('pyynto' => $hoitopyynto));
+            }
+        } else {
+            //Paluu indeksiin toistaiseksi ainoa varma tie pois ikuisista rekursiopinoista...
+            self::index();
+        }
     }
 
     public static function destroyThisOrder($id) {
