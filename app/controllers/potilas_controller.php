@@ -9,7 +9,8 @@ class PotilasController extends BaseController {
     public static function index() {
         $omatHoitopyynnot = Hoitopyynto::findAllForPatient(self::getCurrentPatientID());
         $potilas = Potilas::find(self::getCurrentPatientID());
-        View::make('potilas/index.html', array('pyynnot' => $omatHoitopyynnot, 'etunimi' => $potilas->etunimi, 'sukunimi' => $potilas->sukunimi));
+        $potilaanOhjeet = Hoitoohje::findAllForPatient(self::getCurrentPatientID());
+        View::make('potilas/index.html', array('pyynnot' => $omatHoitopyynnot, 'ohjeet' => $potilaanOhjeet, 'etunimi' => $potilas->etunimi, 'sukunimi' => $potilas->sukunimi));
     }
 
     public static function createOrder() {
@@ -50,11 +51,11 @@ class PotilasController extends BaseController {
         $attributes = array(
             'id' => $id,
             'potilas_id' => self::getCurrentPatientID(),
-            'laakari_id' => null,
+            'laakari_id' => $params['laakari_id'],
             'luontipvm' => date("Y-m-d"),
-            'kayntipvm' => null,
+            'kayntipvm' => $params['kayntipvm'],
             'oireet' => $params['oireet'],
-            'raportti' => null
+            'raportti' => $params['raportti']
         );
         $paivitettavaHoitopyynto = new Hoitopyynto($attributes);
         $errors = $paivitettavaHoitopyynto->validate_request($paivitettavaHoitopyynto->oireet);

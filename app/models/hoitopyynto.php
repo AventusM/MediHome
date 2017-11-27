@@ -17,10 +17,10 @@ class Hoitopyynto extends BaseModel {
         $query = DB::connection()->prepare('SELECT * FROM Hoitopyynto WHERE potilas_id=:potilas_id');
         $query->execute(array('potilas_id' => $inputPotilasID));
         $rows = $query->fetchAll();
-        $pyynnot = array();
+        $potilaanPyynnot = array();
 
         foreach ($rows as $row) {
-            $pyynnot[] = new Hoitopyynto(array(
+            $potilaanPyynnot[] = new Hoitopyynto(array(
                 'id' => $row['id'],
                 'potilas_id' => $row['potilas_id'],
                 'laakari_id' => $row['laakari_id'],
@@ -30,7 +30,26 @@ class Hoitopyynto extends BaseModel {
                 'raportti' => $row['raportti']
             ));
         }
-        return $pyynnot;
+        return $potilaanPyynnot;
+    }
+
+    public static function findAllFreeForAllDoctors() {
+        $query = DB::connection()->prepare('SELECT * FROM Hoitopyynto WHERE laakari_id IS NULL');
+        $query->execute();
+        $rows = $query->fetchAll();
+        $vapaatPyynnot = array();
+        foreach ($rows as $row) {
+            $vapaatPyynnot[] = new Hoitopyynto(array(
+                'id' => $row['id'],
+                'potilas_id' => $row['potilas_id'],
+                'laakari_id' => $row['laakari_id'],
+                'luontipvm' => $row['luontipvm'],
+                'kayntipvm' => $row['kayntipvm'],
+                'oireet' => $row['oireet'],
+                'raportti' => $row['raportti']
+            ));
+        }
+        return $vapaatPyynnot;
     }
 
     public static function find($id) {

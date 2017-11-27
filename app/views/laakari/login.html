@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>MediHome</h1>
-<!-- Kaikki lomakkeen elementit form-tagin sisään -->
-<form method="POST" action="{{base_path}}/login" class="inputFieldCustomWidth">
+<h2>Lääkärin kirjautuminen</h2>
+<form method="POST" action="{{base_path}}/login/d" class="inputFieldCustomWidth">
     <!-- Tekstikenttä käyttäjätunnukselle -->
     <div class="form-group">
         <label>Käyttäjätunnus</label>
@@ -14,7 +14,6 @@
         <label>Salasana</label>
         <input name="password" class="form-control" type="password">
     </div>
-    <p>Uusi käyttäjä? <a href="#">rekisteröidy</a></p>
     <button type="submit" class="btn btn-primary btn">Kirjaudu</button>
 </form>
 {% endblock %}

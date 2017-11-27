@@ -37,8 +37,8 @@
         {% endfor %}
     </tbody>
 </table>
-
-<!--<br/>
+<br>
+<hr>
 <h2>Voimassaolevat hoito-ohjeet</h2>
 <table class="table table-condensed table-striped table-hover">
     <thead>
@@ -50,12 +50,14 @@
         </tr>
     </thead>
     <tbody>
+        {% for ohje in ohjeet %}
         <tr>
-            <td>50</td>
-            <td>4.11.2017</td>
-            <td>Viktor Moroz</td>
-            <td><button type="submit" class="btn btn-default btn-link btn-xs">Lue</button></td>
+            <td>{{ohje.id}}</td>
+            <td>{{ohje.luontipvm}}</td>
+            <td>{{ohje.laakari_id}}</td>
+            <td><a href="#" class="btn btn-default btn-xs">Lue</a></td>
         </tr>
+        {% endfor %}
     </tbody>
-</table>-->
+</table>
 {% endblock %}

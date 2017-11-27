@@ -11,9 +11,25 @@ class BaseController {
         return null;
     }
 
-    public static function check_logged_in() {
-        // Toteuta kirjautumisen tarkistus tähän.
-        // Jos käyttäjä ei ole kirjautunut sisään, ohjaa hänet toiselle sivulle (esim. kirjautumissivulle).
+    public static function get_doctor_logged_in() {
+        if (isset($_SESSION['laakari'])) {
+            $laakari_id = $_SESSION['laakari'];
+            $laakari = Laakari::find($laakari_id);
+            return $laakari;
+        }
+        return null;
+    }
+
+    public static function check_potilas_logged_in() {
+        if (!isset($_SESSION['potilas'])) {
+            Redirect::to('/login', array('message' => 'Kirjaudu ensin sisään!'));
+        }
+    }
+
+    public static function check_doctor_logged_in() {
+        if (!isset($_SESSION['laakari'])) {
+            Redirect::to('/login/d', array('message' => 'Kirjaudu ensin sisään'));
+        }
     }
 
 }

@@ -1,46 +1,46 @@
 <?php
 
-class Potilas extends BaseModel {
+class Laakari extends BaseModel {
 
-    public $id, $etunimi, $sukunimi, $hetu, $username, $pass;
+    public $id, $etunimi, $sukunimi, $sv, $username, $pass;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
     }
 
-    public static function authenticate($inputUsr, $inputPwd) {
-        $query = DB::connection()->prepare('SELECT * FROM Potilas WHERE username=:user AND pass=:pwd LIMIT 1');
-        $query->execute(array('user' => $inputUsr, 'pwd' => $inputPwd));
+    public static function authenticate($inputDoc, $inputPwd) {
+        $query = DB::connection()->prepare('SELECT * FROM Laakari WHERE username=:user AND pass=:pwd LIMIT 1');
+        $query->execute(array('user' => $inputDoc, 'pwd' => $inputPwd));
         $row = $query->fetch();
         if ($row) {
-            $potilas = new Potilas(array(
+            $laakari = new Laakari(array(
                 'id' => $row['id'],
                 'etunimi' => $row['etunimi'],
                 'sukunimi' => $row['sukunimi'],
-                'hetu' => $row['hetu'],
+                'sv' => $row['sv'],
                 'username' => $row['username'],
                 'pass' => $row['pass'],
             ));
-            return $potilas;
+            return $laakari;
         } else {
             return null;
         }
     }
 
     public static function find($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Potilas WHERE id=:inputId LIMIT 1');
+        $query = DB::connection()->prepare('SELECT * FROM Laakari WHERE id=:inputId LIMIT 1');
         $query->execute(array('inputId' => $id));
         $row = $query->fetch();
         if ($row) {
-            $potilas = new Potilas(array(
+            $laakari = new Laakari(array(
                 'id' => $row['id'],
                 'etunimi' => $row['etunimi'],
                 'sukunimi' => $row['sukunimi'],
-                'hetu' => $row['hetu'],
+                'sv' => $row['sv'],
                 'username' => $row['username'],
                 'pass' => $row['pass'],
             ));
-            return $potilas;
+            return $laakari;
         }
         return null;
     }

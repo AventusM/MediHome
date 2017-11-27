@@ -33,14 +33,17 @@
                         <span class="icon-bar"></span>
                     </button>
                     <!--Sovelluksen nimi--> 
-                    <a class="navbar-brand" href="#">MediHome</a>
+                    <a class="navbar-brand" href="{{base_path}}/potilas">MediHome</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="navigation">
+                    <form class="navbar-form navbar-right" method="POST" action="{{base_path}}/logout">
+                        <button type="submit" class="btn btn-link">Kirjaudu ulos</button>
+                    </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a class="emphasisFont" href="{{base_path}}/potilas/new">Pyydä kotikäyntiä</a></li>
-                        <li><a href="#">Kirjaudu ulos</a></li>
                     </ul>
+
                 </div>
             </div>
         </nav>
