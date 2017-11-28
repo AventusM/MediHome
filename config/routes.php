@@ -32,7 +32,7 @@ $routes->get('/potilas/hoitopyynto/:id/destroy', 'check_potilas_logged_in', func
     PotilasController::destroyThisOrder($id);
 });
 
-$routes->get('/login', function() {
+$routes->get('/login/', function() {
     UserController::login();
 });
 
@@ -71,4 +71,8 @@ $routes->post('/logout', function() {
 //Lääkäri
 $routes->post('/login/d', function() {
     UserController::handle_doctor_login();
+});
+
+$routes->post('/laakari/accept', function() {
+    Laakaricontroller::acceptRequest();
 });

@@ -85,9 +85,14 @@ class Hoitopyynto extends BaseModel {
         $this->id = $row['id'];
     }
 
-    public function update() {
+    public function updateSymptoms() {
         $query = DB::connection()->prepare('UPDATE Hoitopyynto SET oireet=:oireet WHERE id=:id');
         $query->execute(array('id' => $this->id, 'oireet' => $this->oireet));
+    }
+
+    public function assignDoctor() {
+        $query = DB::connection()->prepare('UPDATE Hoitopyynto SET laakari_id=:laakari_id, kayntipvm=:kayntipvm WHERE id=:id');
+        $query->execute(array('id' => $this->id, 'laakari_id' => $this->laakari_id, 'kayntipvm' => date("Y-m-d")));
     }
 
     public function destroy() {

@@ -68,12 +68,53 @@
                         <td>{{pyynto.id}}</td>
                         <td><label class="label label-success">{{pyynto.luontipvm}}</label></td>
                         <td>{{pyynto.potilas_id}}</td>
-                        <td><button type="submit" class="btn btn-info btn-xs">Lue</button></td>
-                        <td><button type="submit" class="btn btn-default btn-xs">Suorita</button></td>
+                        <td><button type="submit" class="btn btn-default btn-xs">Lue</button></td>
+                        <td>
+                            <!-- ID Piilotettu formin sisään materiaalin tempun avulla -->
+                            <form method="POST" action="{{base_path}}/laakari/accept">
+                                <input name="pyynto_id" value="{{pyynto.id}}" type="hidden">
+                                <button type="submit" class="btn btn-default btn-xs">Suorita</button>
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
+            <br/>
+            <hr>
+            <h2>Hoitotapahtumat</h2>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>PyyntoID</th>
+                        <th>Pyynnön luontipäivä</th>
+                        <th>Potilas</th>
+                        <th>Käynti suoritettu</th>
+                        <th>Raportti</th>
+                        <th>Hoito-ohje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for hpyynto in hyvaksytytpyynnot %}
+                    <tr>
+                        <td>{{hpyynto.id}}</td>
+                        <td>{{hpyynto.luontipvm}}</td>
+                        <td>{{hpyynto.potilas_id}}</td>
+                        <td>{{hpyynto.kayntipvm}}</td>
+                        <!-- Kaksi alimmaista vaatinevat else/if tms-->
+                        <td>
+                            <form method="POST" action="LAITA TÄNNE JOTAIN MUISTA LAITTAA TÄNNE OSOITE OMG MUISTA!!">
+                                <input name="hpyynto_id" value="{{hpyynto.id}}" type="hidden">
+                                <button type="submit" class="btn btn-default btn-xs">Luo</button>
+                            </form>                        
+                        </td>
+                        <td><a href="#" class="btn btn-default btn-link btn-xs">Muokkaa</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
             {% endblock %}
         </div>
 

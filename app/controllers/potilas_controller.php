@@ -71,7 +71,7 @@ class PotilasController extends BaseController {
         $paivitettavaHoitopyynto = new Hoitopyynto($attributes);
         $errors = $paivitettavaHoitopyynto->validate_request($paivitettavaHoitopyynto->oireet);
         if (count($errors) == 0) {
-            $paivitettavaHoitopyynto->update();
+            $paivitettavaHoitopyynto->updateSymptoms();
             Redirect::to('/potilas');
         } else {
             //Joudutaan hakemaan hoitopyyntö erikseen -> muuten placeholderit tms. elementtien sisällöt katoavat kokonaan
