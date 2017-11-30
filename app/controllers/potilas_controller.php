@@ -20,7 +20,7 @@ class PotilasController extends BaseController {
     //Metodia muutettu 5. viikolla -> halutaan
     //varmistaa ettei päästä käsiksi toisten
     //hoitopyyntöihin tms.
-    public static function viewOrder($id) {
+    public static function reviewOrder($id) {
         if (Hoitopyynto::find($id) != null) {
             $hoitopyynto = Hoitopyynto::find($id);
             $idMatch = Hoitopyynto::indexBoundsCheck(self::getCurrentPatientID(), $hoitopyynto->potilas_id);
@@ -29,6 +29,19 @@ class PotilasController extends BaseController {
             }
         } else {
             //Paluu indeksiin toistaiseksi ainoa varma tie pois ikuisista rekursiopinoista...
+            self::index();
+        }
+    }
+
+    //Sama kuin hoitopyynnölle mutta lääkärien ohjeistusten haku
+    public static function readInstructions($id) {
+        if (Hoitoohje::find($id) != null) {
+            $hoitoohje = Hoitoohje::find($id);
+            $idMatch = Hoitoohje::indexBoundsCheck(self::getCurrentPatientID(), $hoitoohje->potilas_id);
+            if ($idMatch) {
+                View::make('potilas/readinstructions.html', array('hoitoohje' => $hoitoohje));
+            }
+        } else {
             self::index();
         }
     }
@@ -50,7 +63,7 @@ class PotilasController extends BaseController {
         ));
         $errors = $pyynto->validate_request($pyynto->oireet);
         if (count($errors) == 0) {
-            $pyynto->save();
+            $pyynto->saveNewRequest();
             Redirect::to('/potilas');
         } else {
             View::make('potilas/new.html', array('errors' => $errors));

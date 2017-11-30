@@ -95,7 +95,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for hpyynto in hyvaksytytpyynnot %}
+                    {% for hpyynto in hyvaksytytHoitopyynnot %}
                     <tr>
                         <td>{{hpyynto.id}}</td>
                         <td>{{hpyynto.luontipvm}}</td>
@@ -108,7 +108,7 @@
                                 <button type="submit" class="btn btn-default btn-xs">Luo</button>
                             </form>                        
                         </td>
-                        <td><a href="#" class="btn btn-default btn-link btn-xs">Muokkaa</a></td>
+                        <td><a class="btn-default btn btn-xs" href="{{base_path}}/laakari/hoitopyynto/{{hpyynto.id}}">Muokkaa</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

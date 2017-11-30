@@ -24,12 +24,15 @@ $routes->get('/potilas/new/', 'check_potilas_logged_in', function() {
     PotilasController::createOrder();
 });
 
-$routes->get('/potilas/hoitopyynto/:id', 'check_potilas_logged_in', function($id) {
-    PotilasController::viewOrder($id);
+$routes->get('/potilas/hoitopyynto/:id', 'check_potilas_logged_in', function($orderId) {
+    PotilasController::reviewOrder($orderId);
 });
 
-$routes->get('/potilas/hoitopyynto/:id/destroy', 'check_potilas_logged_in', function($id) {
-    PotilasController::destroyThisOrder($id);
+$routes->get('/potilas/hoitopyynto/:id/destroy', 'check_potilas_logged_in', function($orderId) {
+    PotilasController::destroyThisOrder($orderId);
+});
+$routes->get('/potilas/hoitopyynto/:id/read', 'check_potilas_logged_in', function($orderId) {
+    PotilasController::readInstructions($orderId);
 });
 
 $routes->get('/login/', function() {
@@ -37,12 +40,16 @@ $routes->get('/login/', function() {
 });
 
 //Lääkäri
+
+$routes->get('/login/d', function() {
+    UserController::doctorLogin();
+});
 $routes->get('/laakari/', function() {
     Laakaricontroller::index();
 });
 
-$routes->get('/login/d', function() {
-    UserController::doctorLogin();
+$routes->get('/laakari/hoitopyynto/:id', function($id) {
+    Laakaricontroller::createInstructions($id);
 });
 
 // POST
@@ -52,12 +59,12 @@ $routes->post('/potilas/new', function() {
     PotilasController::store();
 });
 
-$routes->post('/potilas/hoitopyynto/:id', function($id) {
-    PotilasController::update($id);
+$routes->post('/potilas/hoitopyynto/:id', function($orderId) {
+    PotilasController::update($orderId);
 });
 
-$routes->post('/potilas/hoitopyynto/:id/destroy', function($id) {
-    PotilasController::destroy($id);
+$routes->post('/potilas/hoitopyynto/:id/destroy', function($orderId) {
+    PotilasController::destroy($orderId);
 });
 
 $routes->post('/login', function() {
@@ -75,4 +82,8 @@ $routes->post('/login/d', function() {
 
 $routes->post('/laakari/accept', function() {
     Laakaricontroller::acceptRequest();
+});
+
+$routes->post('/laakari/luohoitoohje', function() {
+    Laakaricontroller::storeNewInstructionsToAcceptedRequest();
 });
