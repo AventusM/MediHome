@@ -8,6 +8,12 @@ class Potilas extends BaseModel {
         parent::__construct($attributes);
     }
 
+    /*
+     * Tavallisen käyttäjän kirjautumisen yhteydessä suoritettava funktio, joka palauttaa
+     * joko löydetyn käyttäjän oikein annettujen tunnusten perusteella tai null, jolloin
+     * järjestelmä myöhemmin ilmoittaa (tai) ei käyttäjälle virheellisestä suorituksesta
+     */
+
     public static function authenticate($inputUsr, $inputPwd) {
         $query = DB::connection()->prepare('SELECT * FROM Potilas WHERE username=:user AND pass=:pwd LIMIT 1');
         $query->execute(array('user' => $inputUsr, 'pwd' => $inputPwd));
@@ -26,6 +32,10 @@ class Potilas extends BaseModel {
             return null;
         }
     }
+
+    /*
+     * Sisäänkirjautuneen käyttäjän identifiointi etusivulla (ks. Lääkäriluokan vastaava)
+     */
 
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Potilas WHERE id=:inputId LIMIT 1');

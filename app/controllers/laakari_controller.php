@@ -1,10 +1,19 @@
 <?php
 
 class Laakaricontroller extends BaseController {
+    /*
+     * Copy-pasten eliminointia
+     */
 
     public static function getCurrentDoctorID() {
         return $_SESSION['laakari'];
     }
+
+    /*
+     * Lääkärin etusivun toteuttava funktio
+     * Funktio listaa lääkärin hyväksymät hoitopyynnöt sekä kaikki hyväksymättömät
+     * lisäksi näytetään lääkärin omat raportit suoritetuista kotikäynneistä
+     */
 
     public static function index() {
         $vapaatHoitopyynnot = Hoitopyynto::findAllFreeForAllDoctors();
@@ -14,6 +23,10 @@ class Laakaricontroller extends BaseController {
         View::make('laakari/index.html', array('pyynnot' => $vapaatHoitopyynnot, 'hyvaksytytHoitopyynnot' => $hyvaksytytHoitopyynnot, 'etunimi' => $laakari->etunimi, 'sukunimi' => $laakari->sukunimi));
     }
 
+    /*
+     * Funktio suoritetaan, kun lääkäri painaa 'suorita' nappia kaikille lääkäreille vapaissa hoitopyynnöissä
+     */
+
     public static function acceptRequest() {
         $params = $_POST;
         $hyvaksyttyHoitopyynto = Hoitopyynto::find($params['pyynto_id']);
@@ -22,17 +35,23 @@ class Laakaricontroller extends BaseController {
         Redirect::to("/laakari");
     }
 
-    //Ohje perustuu olemassaolevaan hoitopyyntoon / raporttiin
+    /*
+     * Lääkärille näytettävä sivu, kun hän haluaa luoda hoito-ohjeen jo olemassaolevasta
+     * hoitopyynnöstä, jonka hän itse on hyväksynyt
+     */
+
     public static function createInstructions($id) {
         $muokattavaHoitopyynto = Hoitopyynto::find($id);
         View::make('laakari/editinstructions.html', array('pyynto' => $muokattavaHoitopyynto));
     }
 
+    /*
+     * Funktio luo uuden hoito-ohjeen perustuen createInstructions($id) - metodin sekä täytetyn tekstikentän (ohje) tietoihin
+     */
+
     public static function storeNewInstructionsToAcceptedRequest() {
         $params = $_POST;
         $ohje = new Hoitoohje(array(
-            //Selvitä, miten potilas id saadaan selville tässä!
-            //Varmaankin hidden type taaskin . . .
             'potilas_id' => $params['potilas_id'],
             'laakari_id' => self::getCurrentDoctorID(),
             'luontipvm' => date('Y-m-d'),

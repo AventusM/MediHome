@@ -1,19 +1,35 @@
 <?php
 
 class UserController extends BaseController {
+    /*
+     * Tyypilliselle käyttäjälle näytettävä kirjautumisnäkymä
+     */
 
     public static function login() {
         View::make('user/login.html');
     }
 
+    /*
+     * Lääkärille näytettävä kirjautumisnäkymä
+     */
+
     public static function doctorLogin() {
         View::make('laakari/login.html');
     }
+
+    /*
+     * Käyttäjän toimesta suoritettava uloskirjautuminen navigaatiopalkin 'kirjaudu ulos' 
+     * linkkiä painamalla.
+     */
 
     public static function logout() {
         $_SESSION['potilas'] = null;
         Redirect::to('/login', array('message' => 'Olet kirjautunut ulos'));
     }
+
+    /*
+     * Todennetaan käyttäjän antaneen oikeat tunnustiedot järjestelmään
+     */
 
     public static function handle_login() {
         $params = $_POST;
@@ -27,6 +43,10 @@ class UserController extends BaseController {
             Redirect::to('/potilas');
         }
     }
+
+    /*
+     * Kuin ylläoleva, mutta lääkärille
+     */
 
     public static function handle_doctor_login() {
         $params = $_POST;

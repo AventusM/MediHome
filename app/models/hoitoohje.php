@@ -8,9 +8,18 @@ class Hoitoohje extends BaseModel {
         parent::__construct($attributes);
     }
 
+    /*
+     * Varmistustapa sille, ettei kirjautunut käyttäjä pääse toisen käyttäjän
+     * tietoihin käsiksi urlia muokkaamalla
+     */
+
     public static function indexBoundsCheck($potilasID, $hoitopyyntoID) {
         return $potilasID === $hoitopyyntoID;
     }
+
+    /*
+     * Potilaalle näytettävä yksittäinen ohje, kun hän valitsee sellaisen etusivultaan  
+     */
 
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Hoitoohje WHERE id = :id LIMIT 1');
@@ -31,6 +40,12 @@ class Hoitoohje extends BaseModel {
         return null;
     }
 
+    /*
+     * Potilaalle taulukkomuodossa näytettävät hoito-ohjeet. Lääkäri on siis tässä 
+     * vaiheessa suorittanut kotikäynnin ja mahdollisesti raportoinut siitä omalla
+     * etusivullaan
+     */
+
     public static function findAllForPatient($id) {
         $query = DB::connection()->prepare('SELECT * FROM Hoitoohje WHERE potilas_id=:id');
         $query->execute(array('id' => $id));
@@ -49,6 +64,11 @@ class Hoitoohje extends BaseModel {
         }
         return $ohjeet;
     }
+
+    /*
+     * Funktio tallentaa Lääkäricontroller - luokan antamat tiedot uudesta hoito-ohjeesta
+     * tietokantaan
+     */
 
     public function saveNewInstructions() {
         $query = DB::connection()->prepare('INSERT INTO Hoitoohje (potilas_id, laakari_id, luontipvm, muokkauspvm, ohje) VALUES (:potilas_id, :laakari_id, :luontipvm, :muokkauspvm, :ohje) RETURNING id');

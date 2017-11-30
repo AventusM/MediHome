@@ -8,6 +8,11 @@ class Laakari extends BaseModel {
         parent::__construct($attributes);
     }
 
+    /*
+     * Sisäänkirjautumisen yhteydessä suoritettava funktio, missä palautetetaan annetuista tiedoista
+     * riippuen lääkäriolio
+     */
+
     public static function authenticate($inputDoc, $inputPwd) {
         $query = DB::connection()->prepare('SELECT * FROM Laakari WHERE username=:user AND pass=:pwd LIMIT 1');
         $query->execute(array('user' => $inputDoc, 'pwd' => $inputPwd));
@@ -26,6 +31,11 @@ class Laakari extends BaseModel {
             return null;
         }
     }
+
+    /*
+     * Hakee yksittäisen lääkärin tiedot parametristä riippuen. Funktiota käytetään ainakin etusivulla
+     * oikean lääkärin tietoihin hakemiseen
+     */
 
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Laakari WHERE id=:inputId LIMIT 1');
