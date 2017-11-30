@@ -11,8 +11,11 @@ Yleisiä linkkejä:
 [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Laakarin_kotikaynnit.html) 
 
 
-## Viikon 4 käyttäjätunnuksia
+## Viikon 5 ohjeistuksia
 
-Käyttäjänimi: AntonM Salasana : test  
-Käyttäjänimi: GeirS  Salasana : test  
+Käyttäjänimi: AntonM Salasana: test  
+Käyttäjänimi: GeirS  Salasana: test  
 [linkki kirjautumiseen](http://amoroz.users.cs.helsinki.fi/antonintietokantasovellus/login)
+
+Lääkärin käyttäjänimi: ViktorM Salasana: test  
+[linkki lääkärin kirjautumiseen](http://amoroz.users.cs.helsinki.fi/antonintietokantasovellus/login/d)
