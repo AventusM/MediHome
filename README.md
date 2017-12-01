@@ -4,7 +4,7 @@ Yleisiä linkkejä:
 
 [Linkki sovellukseen](http://amoroz.users.cs.helsinki.fi/antonintietokantasovellus/)
 
-[Linkki dokumentaatioon](https://github.com/AventusM/Tsoha-Bootstrap/blob/master/doc/MediHome.pdf)
+[Linkki dokumentaatioon](https://github.com/AventusM/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
 
