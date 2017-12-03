@@ -1,0 +1,26 @@
+{% extends "doctorBase.html" %}
+{% block content %}
+<h2>Kotikäyntiraportin asetus</h2>
+{% if errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<hr>
+<p><strong>Olemassaoleva raportti</strong></p>
+<p>{{pyynto.raportti}}</p>
+<hr><form method="POST" action="{{base_path}}/laakari/updatereport">
+    <div class="form-group">
+        <p><strong>Potilaan oireet</strong></p>
+        <p>{{pyynto.oireet}}</p><hr>
+        <textarea rows="4" cols="50" name="raportti"></textarea>
+    </div>
+    <input name="pyynto_id" value="{{pyynto.id}}" type="hidden">
+    <button type="submit" class="btn btn-success btn-xs">Päivitä</button>
+</form>
+<a class="button-wrapper" href="{{base_path}}/laakari"><button type="submit" class="btn btn-xs">&ensp;Peru&ensp;</button></a>
+{% endblock %}

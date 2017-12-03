@@ -53,8 +53,8 @@
         {% for ohje in ohjeet %}
         <tr>
             <td>{{ohje.id}}</td>
+            <td>{{ohje.hoitopyynto_id}}</td>
             <td>{{ohje.luontipvm}}</td>
-            <td>{{ohje.laakari_id}}</td>
             <td><a href="{{base_path}}/potilas/hoitopyynto/{{ohje.id}}/read" class="btn btn-default btn-xs">Lue</a></td>
         </tr>
         {% endfor %}

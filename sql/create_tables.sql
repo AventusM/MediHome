@@ -29,8 +29,7 @@ raportti varchar
 
 CREATE TABLE Hoitoohje(
 id SERIAL PRIMARY KEY,
-potilas_id INTEGER REFERENCES Potilas(id),
-laakari_id INTEGER REFERENCES Laakari(id),
+hoitopyynto_id INTEGER REFERENCES Hoitopyynto(id),
 luontipvm date,
 muokkauspvm date,
 ohje varchar

@@ -52,6 +52,10 @@ $routes->get('/laakari/hoitopyynto/:id', function($id) {
     Laakaricontroller::createInstructions($id);
 });
 
+$routes->get('/laakari/hoitopyynto/raportti/:id', function($id) {
+    Laakaricontroller::reviewReport($id);
+});
+
 // POST
 // POST
 //Potilas
@@ -84,6 +88,10 @@ $routes->post('/laakari/accept', function() {
     Laakaricontroller::acceptRequest();
 });
 
-$routes->post('/laakari/luohoitoohje', function() {
-    Laakaricontroller::storeNewInstructionsToAcceptedRequest();
+$routes->post('/laakari/updatereport', function() {
+    Laakaricontroller::updateReport();
 });
+
+//$routes->post('/laakari/luohoitoohje', function() {
+//    Laakaricontroller::storeNewInstructionsToAcceptedRequest();
+//});

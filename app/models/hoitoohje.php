@@ -2,7 +2,7 @@
 
 class Hoitoohje extends BaseModel {
 
-    public $id, $potilas_id, $laakari_id, $luontipvm, $muokkauspvm, $ohje;
+    public $id, $hoitopyynto_id, $luontipvm, $muokkauspvm, $ohje;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -13,8 +13,8 @@ class Hoitoohje extends BaseModel {
      * tietoihin käsiksi urlia muokkaamalla
      */
 
-    public static function indexBoundsCheck($potilasID, $hoitopyyntoID) {
-        return $potilasID === $hoitopyyntoID;
+    public static function indexBoundsCheck($potilasID, $hoitoohjeID) {
+        return $potilasID === $hoitoohjeID;
     }
 
     /*
@@ -29,8 +29,7 @@ class Hoitoohje extends BaseModel {
         if ($row) {
             $ohje = new Hoitoohje(array(
                 'id' => $row['id'],
-                'potilas_id' => $row['potilas_id'],
-                'laakari_id' => $row['laakari_id'],
+                'hoitopyynto_id' => $row['hoitopyynto_id'],
                 'luontipvm' => $row['luontipvm'],
                 'muokkauspvm' => $row['muokkauspvm'],
                 'ohje' => $row['ohje']
@@ -47,7 +46,11 @@ class Hoitoohje extends BaseModel {
      */
 
     public static function findAllForPatient($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Hoitoohje WHERE potilas_id=:id');
+        $query = DB::connection()->prepare(
+                'SELECT Hoitoohje.id, Hoitoohje.hoitopyynto_id, Hoitoohje.luontipvm, muokkauspvm, ohje'
+                . ' FROM Hoitopyynto, Hoitoohje'
+                . ' WHERE Hoitopyynto.potilas_id=:id'
+                . ' AND Hoitoohje.hoitopyynto_id = Hoitopyynto.id');
         $query->execute(array('id' => $id));
         $rows = $query->fetchAll();
         $ohjeet = array();
@@ -55,8 +58,7 @@ class Hoitoohje extends BaseModel {
         foreach ($rows as $row) {
             $ohjeet[] = new Hoitoohje(array(
                 'id' => $row['id'],
-                'potilas_id' => $row['potilas_id'],
-                'laakari_id' => $row['laakari_id'],
+                'hoitopyynto_id' => $row['hoitopyynto_id'],
                 'luontipvm' => $row['luontipvm'],
                 'muokkauspvm' => $row['muokkauspvm'],
                 'ohje' => $row['ohje'],
@@ -71,8 +73,8 @@ class Hoitoohje extends BaseModel {
      */
 
     public function saveNewInstructions() {
-        $query = DB::connection()->prepare('INSERT INTO Hoitoohje (potilas_id, laakari_id, luontipvm, muokkauspvm, ohje) VALUES (:potilas_id, :laakari_id, :luontipvm, :muokkauspvm, :ohje) RETURNING id');
-        $query->execute(array('potilas_id' => $this->potilas_id, 'laakari_id' => $this->laakari_id, 'luontipvm' => $this->luontipvm, 'muokkauspvm' => $this->muokkauspvm, 'ohje' => $this->ohje));
+        $query = DB::connection()->prepare('INSERT INTO Hoitoohje (hoitopyynto_id, luontipvm, muokkauspvm, ohje) VALUES (:hoitopyynto_id, :luontipvm, :muokkauspvm, :ohje) RETURNING id');
+        $query->execute(array('hoitopyynto_id' => $this->hoitopyynto_id, 'luontipvm' => $this->luontipvm, 'muokkauspvm' => $this->muokkauspvm, 'ohje' => $this->ohje));
         $row = $query->fetch();
         $this->id = $row['id'];
     }

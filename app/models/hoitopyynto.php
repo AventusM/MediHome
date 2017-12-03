@@ -110,6 +110,11 @@ class Hoitopyynto extends BaseModel {
         $query->execute(array('id' => $this->id, 'oireet' => $this->oireet));
     }
 
+    public function updateReport() {
+        $query = DB::connection()->prepare('UPDATE Hoitopyynto SET raportti=:raportti WHERE id=:id');
+        $query->execute(array('id' => $this->id, 'raportti' => $this->raportti));
+    }
+
     public function assignDoctor() {
         $query = DB::connection()->prepare('UPDATE Hoitopyynto SET laakari_id=:laakari_id, kayntipvm=:kayntipvm WHERE id=:id');
         $query->execute(array('id' => $this->id, 'laakari_id' => $this->laakari_id, 'kayntipvm' => date("Y-m-d")));

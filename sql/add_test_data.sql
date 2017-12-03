@@ -8,4 +8,3 @@ INSERT INTO Laakari (etunimi, sukunimi, sv, username, pass) VALUES ('Viktor', 'M
 INSERT INTO Hoitopyynto (potilas_id, laakari_id, luontipvm, kayntipvm, oireet, raportti) VALUES (1,1, CURRENT_DATE - 10, CURRENT_DATE, 'Testioireet', 'Testiraportti');
 INSERT INTO Hoitopyynto (potilas_id, laakari_id, luontipvm, kayntipvm, oireet, raportti) VALUES (2,1, CURRENT_DATE - 1, null, 'Testioireet2', 'Testiraportti2');
 -- Hoito-ohje - taulun testidata
-INSERT INTO Hoitoohje (potilas_id, laakari_id, luontipvm, muokkauspvm, ohje) VALUES (1, 1, date '2017-11-11' - integer '10', CURRENT_DATE, 'Laihdu läski');

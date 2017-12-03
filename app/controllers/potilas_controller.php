@@ -111,11 +111,11 @@ class PotilasController extends BaseController {
         $attributes = array(
             'id' => $id,
             'potilas_id' => self::getCurrentPatientID(),
-            'laakari_id' => $params['laakari_id'],
+            'laakari_id' => null,
             'luontipvm' => date("Y-m-d"),
-            'kayntipvm' => $params['kayntipvm'],
+            'kayntipvm' => null,
             'oireet' => $params['oireet'],
-            'raportti' => $params['raportti']
+            'raportti' => null
         );
         $paivitettavaHoitopyynto = new Hoitopyynto($attributes);
         $errors = $paivitettavaHoitopyynto->validate_request($paivitettavaHoitopyynto->oireet);

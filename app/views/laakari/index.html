@@ -83,6 +83,7 @@
             <br/>
             <hr>
             <h2>Hoitotapahtumat</h2>
+            <h4>Hoitoraportointi</h4>
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -91,7 +92,6 @@
                         <th>Potilas</th>
                         <th>Käynti suoritettu</th>
                         <th>Raportti</th>
-                        <th>Hoito-ohje</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -101,20 +101,31 @@
                         <td>{{hpyynto.luontipvm}}</td>
                         <td>{{hpyynto.potilas_id}}</td>
                         <td>{{hpyynto.kayntipvm}}</td>
-                        <!-- Kaksi alimmaista vaatinevat else/if tms-->
-                        <td>
-                            <form method="POST" action="LAITA TÄNNE JOTAIN MUISTA LAITTAA TÄNNE OSOITE OMG MUISTA!!">
-                                <input name="hpyynto_id" value="{{hpyynto.id}}" type="hidden">
-                                <button type="submit" class="btn btn-default btn-xs">Luo</button>
-                            </form>                        
-                        </td>
-                        <td><a class="btn-default btn btn-xs" href="{{base_path}}/laakari/hoitopyynto/{{hpyynto.id}}">Muokkaa</a></td>
+                        {% if hpyynto.raportti %}
+                        <td><a class="btn-success btn btn-xs" href="{{base_path}}/laakari/hoitopyynto/raportti/{{hpyynto.id}}">Muokkaa</a></td>
+                        {% else %}
+                        <td><a class="btn-danger btn btn-xs" href="{{base_path}}/laakari/hoitopyynto/raportti/{{hpyynto.id}}">&ensp;&ensp;Luo&ensp;&ensp;</a></td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
+            <br/>
+            <h4>Hoito-ohjeistus</h4>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>PyyntoID</th>
+                        <th>Potilas</th>
+                        <th>Ohje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
 
-
+                    </tr>
+                </tbody>
+            </table>
             {% endblock %}
         </div>
 
