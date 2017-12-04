@@ -67,14 +67,36 @@ class Hoitoohje extends BaseModel {
         return $ohjeet;
     }
 
+    public static function findAllForDoctor($id) {
+        $query = DB::connection()->prepare(
+                'SELECT Hoitoohje.id, Hoitoohje.hoitopyynto_id, Hoitoohje.luontipvm, muokkauspvm, ohje'
+                . ' FROM Hoitopyynto, Hoitoohje'
+                . ' WHERE Hoitopyynto.laakari_id=:id'
+                . ' AND Hoitoohje.hoitopyynto_id = Hoitopyynto.id');
+        $query->execute(array('id' => $id));
+        $rows = $query->fetchAll();
+        $ohjeet = array();
+
+        foreach ($rows as $row) {
+            $ohjeet[] = new Hoitoohje(array(
+                'id' => $row['id'],
+                'hoitopyynto_id' => $row['hoitopyynto_id'],
+                'luontipvm' => $row['luontipvm'],
+                'muokkauspvm' => $row['muokkauspvm'],
+                'ohje' => $row['ohje'],
+            ));
+        }
+        return $ohjeet;
+    }
+
     /*
      * Funktio tallentaa Lääkäricontroller - luokan antamat tiedot uudesta hoito-ohjeesta
      * tietokantaan
      */
 
     public function saveNewInstructions() {
-        $query = DB::connection()->prepare('INSERT INTO Hoitoohje (hoitopyynto_id, luontipvm, muokkauspvm, ohje) VALUES (:hoitopyynto_id, :luontipvm, :muokkauspvm, :ohje) RETURNING id');
-        $query->execute(array('hoitopyynto_id' => $this->hoitopyynto_id, 'luontipvm' => $this->luontipvm, 'muokkauspvm' => $this->muokkauspvm, 'ohje' => $this->ohje));
+        $query = DB::connection()->prepare('INSERT INTO Hoitoohje (hoitopyynto_id, luontipvm, muokkauspvm, ohje) VALUES (:hoitopyynto_id, :luontipvm, :muokkauspvm, null) RETURNING id');
+        $query->execute(array('hoitopyynto_id' => $this->hoitopyynto_id, 'luontipvm' => $this->luontipvm, 'muokkauspvm' => $this->muokkauspvm));
         $row = $query->fetch();
         $this->id = $row['id'];
     }

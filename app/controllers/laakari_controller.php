@@ -19,19 +19,29 @@ class Laakaricontroller extends BaseController {
         $vapaatHoitopyynnot = Hoitopyynto::findAllFreeForAllDoctors();
         $laakari = Laakari::find(self::getCurrentDoctorID());
         $hyvaksytytHoitopyynnot = Hoitopyynto::findAllAccepterForDoctor(self::getCurrentDoctorID());
-        //Hoitoraportit / -ohjeet
-        View::make('laakari/index.html', array('pyynnot' => $vapaatHoitopyynnot, 'hyvaksytytHoitopyynnot' => $hyvaksytytHoitopyynnot, 'etunimi' => $laakari->etunimi, 'sukunimi' => $laakari->sukunimi));
+        $hoitoOhjeet = Hoitoohje::findAllForDoctor(self::getCurrentDoctorID());
+        View::make('laakari/index.html', array('ohjeet' => $hoitoOhjeet, 'pyynnot' => $vapaatHoitopyynnot, 'hyvaksytytHoitopyynnot' => $hyvaksytytHoitopyynnot, 'etunimi' => $laakari->etunimi, 'sukunimi' => $laakari->sukunimi));
     }
 
     /*
      * Funktio suoritetaan, kun lääkäri painaa 'suorita' nappia kaikille lääkäreille vapaissa hoitopyynnöissä
+     * Hyväksymisen yhteydessä pyyntöön tulee myös tehdä hoito-ohjeistusta
      */
 
     public static function acceptRequest() {
         $params = $_POST;
-        $hyvaksyttyHoitopyynto = Hoitopyynto::find($params['pyynto_id']);
-        $hyvaksyttyHoitopyynto->laakari_id = self::getCurrentDoctorID();
-        $hyvaksyttyHoitopyynto->assignDoctor();
+        $hyvHP = Hoitopyynto::find($params['pyynto_id']);
+        $hyvHP->laakari_id = self::getCurrentDoctorID();
+        $hyvHP->assignDoctor();
+
+        //Kannattanee heittää omaan metodiin ...
+        $ohje = new Hoitoohje(array(
+            'hoitopyynto_id' => $params['pyynto_id'],
+            'luontipvm' => date('Y-d-m'),
+            'muokkauspvm' => null,
+            'ohje' => null
+        ));
+        $ohje->saveNewInstructions();
         Redirect::to("/laakari");
     }
 
@@ -44,24 +54,6 @@ class Laakaricontroller extends BaseController {
         $muokattavaHoitopyynto = Hoitopyynto::find($id);
         View::make('laakari/editinstructions.html', array('pyynto' => $muokattavaHoitopyynto));
     }
-
-    /*
-     * Funktio luo uuden hoito-ohjeen perustuen createInstructions($id) - metodin sekä täytetyn tekstikentän (ohje) tietoihin
-     */
-
-//    public static function storeNewInstructionsToAcceptedRequest() {
-//        $params = $_POST;
-//        $ohje = new Hoitoohje(array(
-//            'potilas_id' => $params['potilas_id'],
-//            'laakari_id' => self::getCurrentDoctorID(),
-//            'luontipvm' => date('Y-m-d'),
-//            'muokkauspvm' => null,
-//            'ohje' => $params['ohje']
-//        ));
-//        //Muista validoida tyhjä suoritus myöhemmin ...
-//        $ohje->saveNewInstructions();
-//        Redirect::to('/laakari');
-//    }
 
     /*
      * Funktio päivittää Hoitopyynto-taulua lisäämällä tekstiä Raportti-kenttään

@@ -121,9 +121,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for ohje in ohjeet %}
                     <tr>
-
+                        <td>{{ohje.id}}</td>
+                        <td></td>
+                        <td><a class="btn-success btn btn-xs" href="#">Muokkaa</a></td>
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
             {% endblock %}
