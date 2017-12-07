@@ -2,7 +2,7 @@
 
 class Hoitopyynto extends BaseModel {
 
-    public $id, $potilas_id, $laakari_id, $luontipvm, $kayntipvm, $oireet, $raportti;
+    public $id, $potilas_id, $laakari_id, $luontipvm, $kayntipvm, $oireet, $raportti, $ohje;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -22,8 +22,9 @@ class Hoitopyynto extends BaseModel {
         $query->execute(array('potilas_id' => $inputPotilasID));
         $rows = $query->fetchAll();
         $potilaanPyynnot = array();
-
         foreach ($rows as $row) {
+//            $etunimi = Laakari::find($row['laakari_id'])->etunimi;
+//            $sukunimi = Laakari::find($row['laakari_id'])->sukunimi;
             $potilaanPyynnot[] = new Hoitopyynto(array(
                 'id' => $row['id'],
                 'potilas_id' => $row['potilas_id'],
@@ -31,13 +32,18 @@ class Hoitopyynto extends BaseModel {
                 'luontipvm' => $row['luontipvm'],
                 'kayntipvm' => $row['kayntipvm'],
                 'oireet' => $row['oireet'],
-                'raportti' => $row['raportti']
+                'raportti' => $row['raportti'],
+                'ohje' => $row['ohje']
+//                'etunimi' => Laakari::find($row['laakari_id'])->etunimi,
+//                'sukunimi' => Laakari::find($row['laakari_id'])->sukunimi,
             ));
+//            array_push($potilaanPyynnot, $row)
         }
+//        $yhdistettyTaulu = array_merge($potilaanPyynnot, $laakaritPerPyynto);
         return $potilaanPyynnot;
     }
 
-    public static function findAllAccepterForDoctor($inputDoctorID) {
+    public static function findAllAcceptedForDoctor($inputDoctorID) {
         $query = DB::connection()->prepare('SELECT * FROM Hoitopyynto WHERE laakari_id=:laakari_id');
         $query->execute(array('laakari_id' => $inputDoctorID));
         $rows = $query->fetchAll();
@@ -51,7 +57,8 @@ class Hoitopyynto extends BaseModel {
                 'luontipvm' => $row['luontipvm'],
                 'kayntipvm' => $row['kayntipvm'],
                 'oireet' => $row['oireet'],
-                'raportti' => $row['raportti']
+                'raportti' => $row['raportti'],
+                'ohje' => $row['ohje']
             ));
         }
         return $laakarinHyvaksymatPyynnot;
@@ -70,7 +77,8 @@ class Hoitopyynto extends BaseModel {
                 'luontipvm' => $row['luontipvm'],
                 'kayntipvm' => $row['kayntipvm'],
                 'oireet' => $row['oireet'],
-                'raportti' => $row['raportti']
+                'raportti' => $row['raportti'],
+                'ohje' => $row['ohje']
             ));
         }
         return $vapaatPyynnot;
@@ -89,7 +97,8 @@ class Hoitopyynto extends BaseModel {
                 'luontipvm' => $row['luontipvm'],
                 'kayntipvm' => $row['kayntipvm'],
                 'oireet' => $row['oireet'],
-                'raportti' => $row['raportti']
+                'raportti' => $row['raportti'],
+                'ohje' => $row['ohje'],
             ));
             return $pyynto;
         }
@@ -115,9 +124,14 @@ class Hoitopyynto extends BaseModel {
         $query->execute(array('id' => $this->id, 'raportti' => $this->raportti));
     }
 
+    public function updateInstruction() {
+        $query = DB::connection()->prepare('UPDATE Hoitopyynto SET ohje=:ohje WHERE id=:id');
+        $query->execute(array('id' => $this->id, 'ohje' => $this->ohje));
+    }
+
     public function assignDoctor() {
         $query = DB::connection()->prepare('UPDATE Hoitopyynto SET laakari_id=:laakari_id, kayntipvm=:kayntipvm WHERE id=:id');
-        $query->execute(array('id' => $this->id, 'laakari_id' => $this->laakari_id, 'kayntipvm' => date("Y-m-d")));
+        $query->execute(array('id' => $this->id, 'laakari_id' => $this->laakari_id, 'kayntipvm' => date("d-m-Y")));
     }
 
     public function destroy() {

@@ -18,9 +18,8 @@ class Laakaricontroller extends BaseController {
     public static function index() {
         $vapaatHoitopyynnot = Hoitopyynto::findAllFreeForAllDoctors();
         $laakari = Laakari::find(self::getCurrentDoctorID());
-        $hyvaksytytHoitopyynnot = Hoitopyynto::findAllAccepterForDoctor(self::getCurrentDoctorID());
-        $hoitoOhjeet = Hoitoohje::findAllForDoctor(self::getCurrentDoctorID());
-        View::make('laakari/index.html', array('ohjeet' => $hoitoOhjeet, 'pyynnot' => $vapaatHoitopyynnot, 'hyvaksytytHoitopyynnot' => $hyvaksytytHoitopyynnot, 'etunimi' => $laakari->etunimi, 'sukunimi' => $laakari->sukunimi));
+        $hyvaksytytHoitopyynnot = Hoitopyynto::findAllAcceptedForDoctor(self::getCurrentDoctorID());
+        View::make('laakari/index.html', array('pyynnot' => $vapaatHoitopyynnot, 'hyvaksytytHoitopyynnot' => $hyvaksytytHoitopyynnot, 'etunimi' => $laakari->etunimi, 'sukunimi' => $laakari->sukunimi));
     }
 
     /*
@@ -34,14 +33,7 @@ class Laakaricontroller extends BaseController {
         $hyvHP->laakari_id = self::getCurrentDoctorID();
         $hyvHP->assignDoctor();
 
-        //Kannattanee heittää omaan metodiin ...
-        $ohje = new Hoitoohje(array(
-            'hoitopyynto_id' => $params['pyynto_id'],
-            'luontipvm' => date('Y-d-m'),
-            'muokkauspvm' => null,
-            'ohje' => null
-        ));
-        $ohje->saveNewInstructions();
+
         Redirect::to("/laakari");
     }
 
@@ -53,6 +45,18 @@ class Laakaricontroller extends BaseController {
     public static function createInstructions($id) {
         $muokattavaHoitopyynto = Hoitopyynto::find($id);
         View::make('laakari/editinstructions.html', array('pyynto' => $muokattavaHoitopyynto));
+    }
+
+    /*
+     * createInstructions - metodin POST - osa
+     */
+
+    public static function updateInstructions() {
+        $params = $_POST;
+        $hoitopyynto = Hoitopyynto::find($params['pyynto_id']);
+        $hoitopyynto->ohje = $params['ohje'];
+        $hoitopyynto->updateInstruction();
+        Redirect::to('/laakari');
     }
 
     /*

@@ -16,8 +16,8 @@ class PotilasController extends BaseController {
     public static function index() {
         $omatHoitopyynnot = Hoitopyynto::findAllForPatient(self::getCurrentPatientID());
         $potilas = Potilas::find(self::getCurrentPatientID());
-        $potilaanOhjeet = Hoitoohje::findAllForPatient(self::getCurrentPatientID());
-        View::make('potilas/index.html', array('pyynnot' => $omatHoitopyynnot, 'ohjeet' => $potilaanOhjeet, 'etunimi' => $potilas->etunimi, 'sukunimi' => $potilas->sukunimi));
+//        $potilaanOhjeet = Hoitoohje::findAllForPatient(self::getCurrentPatientID());
+        View::make('potilas/index.html', array('pyynnot' => $omatHoitopyynnot, 'petunimi' => $potilas->etunimi, 'psukunimi' => $potilas->sukunimi));
     }
 
     /*
@@ -55,11 +55,11 @@ class PotilasController extends BaseController {
      */
 
     public static function readInstructions($id) {
-        if (Hoitoohje::find($id) != null) {
-            $hoitoohje = Hoitoohje::find($id);
-            $idMatch = Hoitoohje::indexBoundsCheck(self::getCurrentPatientID(), $hoitoohje->potilas_id);
+        if (Hoitopyynto::find($id) != null) {
+            $hoitopyynto = Hoitopyynto::find($id);
+            $idMatch = Hoitopyynto::indexBoundsCheck(self::getCurrentPatientID(), $hoitopyynto->potilas_id);
             if ($idMatch) {
-                View::make('potilas/readinstructions.html', array('hoitoohje' => $hoitoohje));
+                View::make('potilas/readinstructions.html', array('hoitopyynto' => $hoitopyynto));
             }
         } else {
             self::index();
@@ -87,10 +87,11 @@ class PotilasController extends BaseController {
         $pyynto = new Hoitopyynto(array(
             'potilas_id' => self::getCurrentPatientID(),
             'laakari_id' => null,
-            'luontipvm' => date("Y-m-d"),
+            'luontipvm' => date("d-m-Y"),
             'kayntipvm' => null,
             'oireet' => $params['oireet'],
-            'raportti' => null
+            'raportti' => null,
+            'ohje' => null
         ));
         $errors = $pyynto->validate_request($pyynto->oireet);
         if (count($errors) == 0) {
@@ -112,10 +113,11 @@ class PotilasController extends BaseController {
             'id' => $id,
             'potilas_id' => self::getCurrentPatientID(),
             'laakari_id' => null,
-            'luontipvm' => date("Y-m-d"),
+            'luontipvm' => date("d-m-Y"),
             'kayntipvm' => null,
             'oireet' => $params['oireet'],
-            'raportti' => null
+            'raportti' => null,
+            'ohje' => null
         );
         $paivitettavaHoitopyynto = new Hoitopyynto($attributes);
         $errors = $paivitettavaHoitopyynto->validate_request($paivitettavaHoitopyynto->oireet);

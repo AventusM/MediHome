@@ -12,13 +12,13 @@
 {% endif %}
 <label>Potilaan antamat oireet</label>
 <!-- post vielä luotava reitteihin -->
-<form method="POST" action="{{base_path}}/laakari/luohoitoohje">
+<form method="POST" action="{{base_path}}/laakari/updateinstructions">
     <div class="form-group">
         <label>{{pyynto.oireet}}</label><br><br><hr>
         <!-- Tähän voisi laittaa vielä käyntiraportin lisäkontekstiksi ... -->
         <textarea rows="4" cols="50" name="ohje"></textarea>
     </div>
-    <input name="potilas_id" value="{{pyynto.potilas_id}}" type="hidden">
+    <input name="pyynto_id" value="{{pyynto.id}}" type="hidden">
     <button type="submit" class="btn btn-success btn-xs">Päivitä</button>
 </form>
 <a class="button-wrapper" href="{{base_path}}/laakari"><button type="submit" class="btn btn-xs">&ensp;Peru&ensp;</button></a>

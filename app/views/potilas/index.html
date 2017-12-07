@@ -1,6 +1,6 @@
 {% extends "patientBase.html" %}
 {% block content %}
-<h1>Potilaan {{etunimi}} {{sukunimi}} etusivu</h1>
+<h1>Potilaan {{petunimi}} {{psukunimi}} etusivu</h1>
 <br/>
 
 <h2>Hoitopyyntösi</h2>
@@ -43,19 +43,23 @@
 <table class="table table-condensed table-striped table-hover">
     <thead>
         <tr>
-            <th>PyyntoID</th>
+            <th>HoitopyyntoID</th>
             <th>Luontipäivä</th>
             <th>Lääkäri</th>
             <th>Sisältö</th>
         </tr>
     </thead>
     <tbody>
-        {% for ohje in ohjeet %}
+        {% for pyynto in pyynnot %}
         <tr>
-            <td>{{ohje.id}}</td>
-            <td>{{ohje.hoitopyynto_id}}</td>
-            <td>{{ohje.luontipvm}}</td>
-            <td><a href="{{base_path}}/potilas/hoitopyynto/{{ohje.id}}/read" class="btn btn-default btn-xs">Lue</a></td>
+            <td>{{pyynto.id}}</td>
+            <td>{{pyynto.luontipvm}}</td>
+            <td>{{pyynto.laakari_id}}</td>
+            {% if pyynto.ohje and pyynto.laakari_id %}
+            <td><a href="{{base_path}}/potilas/hoitopyynto/{{pyynto.id}}/read" class="btn btn-success btn-xs">Lue</a></td>
+            {% else %}
+            <td><a href="{{base_path}}/potilas/hoitopyynto/{{pyynto.id}}/read" class="btn btn-danger btn-xs disabled">Lue</a></td>
+            {% endif %}
         </tr>
         {% endfor %}
     </tbody>

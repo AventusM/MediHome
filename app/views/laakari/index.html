@@ -121,11 +121,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for ohje in ohjeet %}
+                    {% for hpyynto in hyvaksytytHoitopyynnot %}
                     <tr>
-                        <td>{{ohje.id}}</td>
-                        <td></td>
-                        <td><a class="btn-success btn btn-xs" href="#">Muokkaa</a></td>
+                        <td>{{hpyynto.id}}</td>
+                        <td>{{hpyynto.potilas_id}}</td>
+                        {% if hpyynto.ohje %}
+                        <td><a class="btn-success btn btn-xs" href="{{base_path}}/laakari/hoitopyynto/{{hpyynto.id}}">Muokkaa</a></td>
+                        {% else %}
+                        <td><a class="btn-danger btn btn-xs" href="{{base_path}}/laakari/hoitopyynto/{{hpyynto.id}}">Luo</a></td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>

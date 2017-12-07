@@ -7,10 +7,6 @@ function check_potilas_logged_in() {
     BaseController::check_potilas_logged_in();
 }
 
-$routes->get('/hiekkalaatikko/', function() {
-    HelloWorldController::sandbox();
-});
-
 //Potilas
 $routes->get('/', function() {
     UserController::login();
@@ -92,6 +88,6 @@ $routes->post('/laakari/updatereport', function() {
     Laakaricontroller::updateReport();
 });
 
-//$routes->post('/laakari/luohoitoohje', function() {
-//    Laakaricontroller::storeNewInstructionsToAcceptedRequest();
-//});
+$routes->post('/laakari/updateinstructions', function() {
+    Laakaricontroller::updateInstructions();
+});

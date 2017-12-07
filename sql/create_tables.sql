@@ -24,13 +24,6 @@ laakari_id INTEGER REFERENCES Laakari(id),
 luontipvm date,
 kayntipvm date,
 oireet varchar,
-raportti varchar
-);
-
-CREATE TABLE Hoitoohje(
-id SERIAL PRIMARY KEY,
-hoitopyynto_id INTEGER REFERENCES Hoitopyynto(id),
-luontipvm date,
-muokkauspvm date,
+raportti varchar,
 ohje varchar
 );
