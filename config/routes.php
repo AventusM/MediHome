@@ -55,11 +55,16 @@ $routes->get('/login/', function() {
 $routes->get('/login/d', function() {
     UserController::doctorLogin();
 });
+
 $routes->get('/laakari/', 'check_doctor_logged_in', function() {
     Laakaricontroller::index();
 });
 
-$routes->get('/laakari/hoitopyynto/:id', 'check_doctor_logged_in', function($id) {
+$routes->get('/laakari/hoitopyynto/:id/read', 'check_doctor_logged_in', function($id) {
+    Laakaricontroller::previewReport($id);
+});
+
+$routes->get('/laakari/hoitopyynto/:id/edit', 'check_doctor_logged_in', function($id) {
     Laakaricontroller::createInstructions($id);
 });
 

@@ -61,6 +61,7 @@ class Laakaricontroller extends BaseController {
 
     /*
      * Funktio päivittää Hoitopyynto-taulua lisäämällä tekstiä Raportti-kenttään
+     * Niille hoitopyynnöille, jotka lääkäri on hyväksynyt
      */
 
     public static function reviewReport($id) {
@@ -74,6 +75,15 @@ class Laakaricontroller extends BaseController {
             //Paluu indeksiin toistaiseksi ainoa varma tie pois ikuisista rekursiopinoista...
             self::index();
         }
+    }
+
+    /*
+     * Muista lisätä KAIKKIIN numeroparametrilinkkeihin !!! INDEXOUTOFBOUNDS CHECK !!!
+     */
+
+    public static function previewReport($id) {
+        $vapaapyynto = Hoitopyynto::find($id);
+        View::make('laakari/readOrder.html', array('pyynto' => $vapaapyynto));
     }
 
     /*
