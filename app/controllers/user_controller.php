@@ -28,6 +28,15 @@ class UserController extends BaseController {
     }
 
     /*
+     * Uloskirjautumisominaisuus lääkärille
+     */
+
+    public static function doctorLogout() {
+        $_SESSION['laakari'] = null;
+        Redirect::to('/login/d', array('message' => 'Huomenna jatketaan!'));
+    }
+
+    /*
      * Todennetaan käyttäjän antaneen oikeat tunnustiedot järjestelmään
      */
 

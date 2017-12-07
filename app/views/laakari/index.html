@@ -1,151 +1,90 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "doctorBase.html" %}
+{% block content %}
 
-        <title>
-            {% block title %}
-            MediHome
-            {% endblock %}
-        </title>
-
-        {% block head %}
-        <!-- Bootstrap (tyylitiedosto) -->
-        <link href="{{base_path}}/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Oma tyylitiedostomme -->
-        <link href="{{base_path}}/assets/css/site.css" rel="stylesheet">
-        {% endblock %}
-    </head>
-
-    <body>
-
-        <nav class="navbar navbar-inverse" role="navigation">
-            <div class="container-fluid">
-
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <!--Sovelluksen nimi--> 
-                    <a class="navbar-brand" href="#">MediHome</a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="navigation">
-                    <ul class="nav navbar-nav navbar-right">
-                        <!--Navigaation linkit--> 
-                        <li><a href="#">Kirjaudu ulos</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-
-        <div id="main-container">
-            {% block content %}
-            <h1>Lääkärin {{etunimi}} {{sukunimi}} etusivu</h1>
-            <br/>
-            <h2>Vapaat hoitopyynnöt</h2>
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>Pyynnön ID</th>
-                        <th>Viimeksi muokattu</th>
-                        <!--PotilasId -> Potilaan nimi-->
-                        <th>Potilas</th>
-                        <th>Oireet</th>
-                        <th>Kotikäynti</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for pyynto in pyynnot %}
-                    <tr>
-                        <td>{{pyynto.id}}</td>
-                        <td><label class="label label-success">{{pyynto.luontipvm}}</label></td>
-                        <td>{{pyynto.potilas_id}}</td>
-                        <td><button type="submit" class="btn btn-default btn-xs">Lue</button></td>
-                        <td>
-                            <!-- ID Piilotettu formin sisään materiaalin tempun avulla -->
-                            <form method="POST" action="{{base_path}}/laakari/accept">
-                                <input name="pyynto_id" value="{{pyynto.id}}" type="hidden">
-                                <button type="submit" class="btn btn-default btn-xs">Suorita</button>
-                            </form>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <br/>
-            <hr>
-            <h2>Hoitotapahtumat</h2>
-            <h4>Hoitoraportointi</h4>
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>PyyntoID</th>
-                        <th>Pyynnön luontipäivä</th>
-                        <th>Potilas</th>
-                        <th>Käynti suoritettu</th>
-                        <th>Raportti</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for hpyynto in hyvaksytytHoitopyynnot %}
-                    <tr>
-                        <td>{{hpyynto.id}}</td>
-                        <td>{{hpyynto.luontipvm}}</td>
-                        <td>{{hpyynto.potilas_id}}</td>
-                        <td>{{hpyynto.kayntipvm}}</td>
-                        {% if hpyynto.raportti %}
-                        <td><a class="btn-success btn btn-xs" href="{{base_path}}/laakari/hoitopyynto/raportti/{{hpyynto.id}}">Muokkaa</a></td>
-                        {% else %}
-                        <td><a class="btn-danger btn btn-xs" href="{{base_path}}/laakari/hoitopyynto/raportti/{{hpyynto.id}}">&ensp;&ensp;Luo&ensp;&ensp;</a></td>
-                        {% endif %}
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <br/>
-            <h4>Hoito-ohjeistus</h4>
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>PyyntoID</th>
-                        <th>Potilas</th>
-                        <th>Ohje</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for hpyynto in hyvaksytytHoitopyynnot %}
-                    <tr>
-                        <td>{{hpyynto.id}}</td>
-                        <td>{{hpyynto.potilas_id}}</td>
-                        {% if hpyynto.ohje %}
-                        <td><a class="btn-success btn btn-xs" href="{{base_path}}/laakari/hoitopyynto/{{hpyynto.id}}">Muokkaa</a></td>
-                        {% else %}
-                        <td><a class="btn-danger btn btn-xs" href="{{base_path}}/laakari/hoitopyynto/{{hpyynto.id}}">Luo</a></td>
-                        {% endif %}
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {% endblock %}
-        </div>
-
-        {% block body %}
-        <!-- jQuery -->
-        <script src="{{base_path}}/assets/js/jquery.min.js"></script>
-
-        <!-- Bootstrap (skriptitiedosto) -->
-        <script src="{{base_path}}/assets/bootstrap/js/bootstrap.min.js"></script>
-
-        <!-- Oma skriptitiedostomme -->
-        <script src="{{base_path}}/assets/js/site.js"></script>
-        {% endblock %}
-    </body>
-</html>
+<h1>Lääkärin {{etunimi}} {{sukunimi}} etusivu</h1>
+<br/>
+<h2>Vapaat hoitopyynnöt</h2>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Pyynnön ID</th>
+            <th>Viimeksi muokattu</th>
+            <!--PotilasId -> Potilaan nimi-->
+            <th>Potilas</th>
+            <th>Oireet</th>
+            <th>Kotikäynti</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pyynto in pyynnot %}
+        <tr>
+            <td>{{pyynto.id}}</td>
+            <td><label class="label label-success">{{pyynto.luontipvm}}</label></td>
+            <td>{{pyynto.potilas_id}}</td>
+            <td><button type="submit" class="btn btn-default btn-xs">Lue</button></td>
+            <td>
+                <!-- ID Piilotettu formin sisään materiaalin tempun avulla -->
+                <form method="POST" action="{{base_path}}/laakari/accept">
+                    <input name="pyynto_id" value="{{pyynto.id}}" type="hidden">
+                    <button type="submit" class="btn btn-default btn-xs">Suorita</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br/>
+<hr>
+<h2>Hoitotapahtumat</h2>
+<h4>Hoitoraportointi</h4>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>PyyntoID</th>
+            <th>Pyynnön luontipäivä</th>
+            <th>Potilas</th>
+            <th>Käynti suoritettu</th>
+            <th>Raportti</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for hpyynto in hyvaksytytHoitopyynnot %}
+        <tr>
+            <td>{{hpyynto.id}}</td>
+            <td>{{hpyynto.luontipvm}}</td>
+            <td>{{hpyynto.potilas_id}}</td>
+            <td>{{hpyynto.kayntipvm}}</td>
+            {% if hpyynto.raportti %}
+            <td><a class="btn-success btn btn-xs" href="{{base_path}}/laakari/hoitopyynto/raportti/{{hpyynto.id}}">Muokkaa</a></td>
+            {% else %}
+            <td><a class="btn-danger btn btn-xs" href="{{base_path}}/laakari/hoitopyynto/raportti/{{hpyynto.id}}">&ensp;&ensp;Luo&ensp;&ensp;</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br/>
+<h4>Hoito-ohjeistus</h4>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>PyyntoID</th>
+            <th>Potilas</th>
+            <th>Ohje</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for hpyynto in hyvaksytytHoitopyynnot %}
+        <tr>
+            <td>{{hpyynto.id}}</td>
+            <td>{{hpyynto.potilas_id}}</td>
+            {% if hpyynto.ohje %}
+            <td><a class="btn-success btn btn-xs" href="{{base_path}}/laakari/hoitopyynto/{{hpyynto.id}}">Muokkaa</a></td>
+            {% else %}
+            <td><a class="btn-danger btn btn-xs" href="{{base_path}}/laakari/hoitopyynto/{{hpyynto.id}}">Luo</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
