@@ -10,7 +10,6 @@ Yleisiä linkkejä:
 
 [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Laakarin_kotikaynnit.html) 
 
-
 ## Viikon 5 ohjeistuksia
 
 Käyttäjänimi: AntonM Salasana: test  
