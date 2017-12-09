@@ -13,76 +13,99 @@ class Hoitopyynto extends BaseModel {
         return parent::validate_request($paramOireet);
     }
 
-    public static function indexBoundsCheck($potilasID, $hoitopyyntoID) {
-        return $potilasID === $hoitopyyntoID;
+    public static function indexBoundsCheck($inputID, $hoitopyyntoID) {
+        return $inputID === $hoitopyyntoID;
     }
 
+    /*
+     * Esittelynäkymään potilaan etusivulla.
+     * Sijoitus 'lääkäri_id' -> etunimi + sukunimi siis ei vaikuta suoritukseen
+     */
+
     public static function findAllForPatient($inputPotilasID) {
-        $query = DB::connection()->prepare('SELECT * FROM Hoitopyynto WHERE potilas_id=:potilas_id');
+        $query = DB::connection()->prepare('SELECT DISTINCT Hoitopyynto.id AS id, Hoitopyynto.potilas_id, laakari_id, luontipvm, kayntipvm, oireet, raportti, ohje, Laakari.etunimi AS letunimi, Laakari.sukunimi AS lsukunimi'
+                . ' FROM Hoitopyynto'
+                . ' INNER JOIN Potilas ON potilas_id=:potilas_id'
+                . ' LEFT JOIN Laakari ON Laakari.id = Hoitopyynto.laakari_id'
+                . ' ORDER BY id');
         $query->execute(array('potilas_id' => $inputPotilasID));
         $rows = $query->fetchAll();
         $potilaanPyynnot = array();
         foreach ($rows as $row) {
-//            $etunimi = Laakari::find($row['laakari_id'])->etunimi;
-//            $sukunimi = Laakari::find($row['laakari_id'])->sukunimi;
             $potilaanPyynnot[] = new Hoitopyynto(array(
                 'id' => $row['id'],
                 'potilas_id' => $row['potilas_id'],
-                'laakari_id' => $row['laakari_id'],
+                'laakari_id' => $row['letunimi'] . ' ' . $row['lsukunimi'],
                 'luontipvm' => $row['luontipvm'],
                 'kayntipvm' => $row['kayntipvm'],
                 'oireet' => $row['oireet'],
                 'raportti' => $row['raportti'],
-                'ohje' => $row['ohje']
-//                'etunimi' => Laakari::find($row['laakari_id'])->etunimi,
-//                'sukunimi' => Laakari::find($row['laakari_id'])->sukunimi,
-            ));
-//            array_push($potilaanPyynnot, $row)
+                'ohje' => $row['ohje']));
         }
-//        $yhdistettyTaulu = array_merge($potilaanPyynnot, $laakaritPerPyynto);
         return $potilaanPyynnot;
     }
 
+    /*
+     * Esittelynäkymään lääkärin etusivulla
+     * Sisältää lääkärin hyväksymät hoitopyynnöt
+     */
+
     public static function findAllAcceptedForDoctor($inputDoctorID) {
-        $query = DB::connection()->prepare('SELECT * FROM Hoitopyynto WHERE laakari_id=:laakari_id');
+        $query = DB::connection()->prepare('SELECT DISTINCT Hoitopyynto.id AS id, Hoitopyynto.potilas_id, laakari_id, luontipvm, kayntipvm, oireet, raportti, ohje, Potilas.etunimi AS petunimi, Potilas.sukunimi AS psukunimi'
+                . ' FROM Hoitopyynto'
+                . ' INNER JOIN Laakari ON Laakari_id=:laakari_id'
+                . ' LEFT JOIN Potilas ON Potilas.id = Hoitopyynto.potilas_id'
+                . ' ORDER BY id');
         $query->execute(array('laakari_id' => $inputDoctorID));
         $rows = $query->fetchAll();
         $laakarinHyvaksymatPyynnot = array();
-
         foreach ($rows as $row) {
             $laakarinHyvaksymatPyynnot[] = new Hoitopyynto(array(
                 'id' => $row['id'],
-                'potilas_id' => $row['potilas_id'],
+                'potilas_id' => $row['petunimi'] . ' ' . $row['psukunimi'],
                 'laakari_id' => $row['laakari_id'],
                 'luontipvm' => $row['luontipvm'],
                 'kayntipvm' => $row['kayntipvm'],
                 'oireet' => $row['oireet'],
                 'raportti' => $row['raportti'],
-                'ohje' => $row['ohje']
-            ));
+                'ohje' => $row['ohje']));
         }
         return $laakarinHyvaksymatPyynnot;
     }
 
+    /*
+     * Esittelynäkymään lääkärin etusivulla
+     * Sisältää kaikki vielä hyväksymättömät hoitopyynnöt
+     */
+
     public static function findAllFreeForAllDoctors() {
-        $query = DB::connection()->prepare('SELECT * FROM Hoitopyynto WHERE laakari_id IS NULL');
+        $query = DB::connection()->prepare('SELECT DISTINCT Hoitopyynto.id AS id, Hoitopyynto.potilas_id, laakari_id, luontipvm, kayntipvm, oireet, raportti, ohje, Potilas.etunimi AS petunimi, Potilas.sukunimi AS psukunimi'
+                . ' FROM Hoitopyynto '
+                . ' INNER JOIN Laakari ON laakari_id IS NULL'
+                . ' LEFT JOIN Potilas ON Potilas.id = Hoitopyynto.potilas_id'
+                . ' ORDER BY id');
         $query->execute();
         $rows = $query->fetchAll();
         $vapaatPyynnot = array();
         foreach ($rows as $row) {
             $vapaatPyynnot[] = new Hoitopyynto(array(
                 'id' => $row['id'],
-                'potilas_id' => $row['potilas_id'],
+                'potilas_id' => $row['petunimi'] . ' ' . $row['psukunimi'],
                 'laakari_id' => $row['laakari_id'],
                 'luontipvm' => $row['luontipvm'],
                 'kayntipvm' => $row['kayntipvm'],
                 'oireet' => $row['oireet'],
                 'raportti' => $row['raportti'],
-                'ohje' => $row['ohje']
-            ));
+                'ohje' => $row['ohje']));
         }
         return $vapaatPyynnot;
     }
+
+    /*
+     * Funktio käytössä tietojen muokkaamista varten.
+     * Tässä siis vaaditaan se, että kaikki tiedot ovat
+     * aidosti tosia
+     */
 
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Hoitopyynto WHERE id = :id LIMIT 1');
@@ -104,6 +127,10 @@ class Hoitopyynto extends BaseModel {
         }
         return null;
     }
+
+    /*
+     * Päivitys- ja talletusmetodeja
+     */
 
     public function saveNewRequest() {
         $query = DB::connection()->prepare('INSERT INTO Hoitopyynto (potilas_id, laakari_id, luontipvm, kayntipvm, oireet, raportti) VALUES (:potilas_id, :laakari_id, :luontipvm, :kayntipvm, :oireet, :raportti) RETURNING id');
