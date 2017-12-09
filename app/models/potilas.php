@@ -98,8 +98,6 @@ class Potilas extends BaseModel {
 
     /*
      * Olemassaolevan käyttäjän tietojen muutos
-     * TODO
-     * TODO
-     * TODO
+     * TODO - Jäänee kurssin ulkopuolelle
      */
 }

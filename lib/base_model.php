@@ -28,11 +28,11 @@ class BaseModel {
     public function validate_username($userName) {
         $errors = array();
         if ($userName == '' || $userName == null) {
-            $errors[] = 'Nimi ei saa olla tyhjä';
+            $errors[] = 'Nimi ei saa olla tyhjä!';
         }
         $foundUser = Potilas::findByUser($userName);
         if ($foundUser) {
-            $errors[] = 'Käyttäjänimi on jo käytössä';
+            $errors[] = 'Käyttäjänimi on jo käytössä!';
         }
         return $errors;
     }
@@ -40,20 +40,20 @@ class BaseModel {
     public function validate_password($pwKentta1, $pwKentta2) {
         $errors = array();
         if ($pwKentta1 != $pwKentta2) {
-            $errors[] = 'Salasanat eivät täsmää, yritä uudelleen';
+            $errors[] = 'Salasanat eivät täsmää, yritä uudelleen!';
         }
         return $errors;
     }
 
-    public function errors() {
-        // Lisätään $errors muuttujaan kaikki virheilmoitukset taulukkona
-        $errors = array();
-
-        foreach ($this->validators as $validator) {
-            // Kutsu validointimetodia tässä ja lisää sen palauttamat virheet errors-taulukkoon
-        }
-
-        return $errors;
-    }
+//    public function errors() {
+//        // Lisätään $errors muuttujaan kaikki virheilmoitukset taulukkona
+//        $errors = array();
+//
+//        foreach ($this->validators as $validator) {
+//            // Kutsu validointimetodia tässä ja lisää sen palauttamat virheet errors-taulukkoon
+//        }
+//
+//        return $errors;
+//    }
 
 }

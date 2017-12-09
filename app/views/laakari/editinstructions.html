@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "doctorBase.html" %}
 {% block content %}
 <h2>Muokkaa hoito-ohjeita</h2>
 {% if errors %}
@@ -10,12 +10,11 @@
     </ul>
 </div>
 {% endif %}
-<label>Potilaan antamat oireet</label>
-<!-- post vielä luotava reitteihin -->
+<hr>
+<p><strong>Olemassaolevat hoito-ohjeet: </strong>{{pyynto.ohje}}</p><hr>
 <form method="POST" action="{{base_path}}/laakari/updateinstructions">
     <div class="form-group">
-        <label>{{pyynto.oireet}}</label><br><br><hr>
-        <!-- Tähän voisi laittaa vielä käyntiraportin lisäkontekstiksi ... -->
+        <p><strong>Potilaan antamat oireet: </strong>{{pyynto.oireet}}</p><hr>
         <textarea rows="4" cols="50" name="ohje"></textarea>
     </div>
     <input name="pyynto_id" value="{{pyynto.id}}" type="hidden">

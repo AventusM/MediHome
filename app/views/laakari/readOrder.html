@@ -1,12 +1,5 @@
-{% extends "patientBase.html" %}
+{% extends "doctorBase.html" %}
 {% block content %}
-<strong>
-    <label>Potilaan x hoitopyyntö</label>
-</strong>
-<br/>
-<p>Potilaan x oireet</p>
-<hr>
-<p>{{pyynto.oireet}}</p>
-<hr>
-<a class="button-wrapper" href="{{base_path}}/laakari"><button type="submit" class="btn btn-xs">&ensp;Palaa&ensp;</button></a>
+<br/><p><strong>Potilaan antamat oireet: </strong>{{pyynto.oireet}}</p><hr>
+<a class="button-wrapper" href="{{base_path}}/laakari"><button type="submit" class="btn btn-default btn-xs">&ensp;Palaa&ensp;</button></a>
 {% endblock %}

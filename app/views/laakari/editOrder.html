@@ -11,12 +11,10 @@
 </div>
 {% endif %}
 <hr>
-<p><strong>Olemassaoleva raportti</strong></p>
-<p>{{pyynto.raportti}}</p>
-<hr><form method="POST" action="{{base_path}}/laakari/updatereport">
+<p><strong>Olemassaoleva raportti: </strong>{{pyynto.raportti}}</p><hr>
+<form method="POST" action="{{base_path}}/laakari/updatereport">
     <div class="form-group">
-        <p><strong>Potilaan oireet</strong></p>
-        <p>{{pyynto.oireet}}</p><hr>
+        <p><strong>Potilaan antamat oireet: </strong>{{pyynto.oireet}}</p><hr>
         <textarea rows="4" cols="50" name="raportti"></textarea>
     </div>
     <input name="pyynto_id" value="{{pyynto.id}}" type="hidden">
