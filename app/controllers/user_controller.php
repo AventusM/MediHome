@@ -77,7 +77,7 @@ class UserController extends BaseController {
         $potilas = Potilas::authenticateLogin($params['username'], $params['password']);
 
         if (!$potilas) {
-            View::make('user/login.html', array('message' => 'Väärä käyttäjätunnus tai salasana'));
+            View::make('user/login.html', array('failuretologin' => 'Väärä käyttäjätunnus tai salasana'));
         } else {
             $_SESSION['potilas'] = $potilas->id;
             UserController::get_potilas_logged_in();
@@ -94,7 +94,7 @@ class UserController extends BaseController {
         $laakari = Laakari::authenticateLogin($params['username'], $params['password']);
 
         if (!$laakari) {
-            View::make('laakari/login.html');
+            View::make('laakari/login.html', array('failuretologin' => 'Väärä käyttäjätunnus tai salasana'));
         } else {
             $_SESSION['laakari'] = $laakari->id;
             UserController::get_doctor_logged_in();

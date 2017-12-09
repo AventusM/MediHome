@@ -2,6 +2,13 @@
 {% block content %}
 <h1>MediHome</h1>
 <hr>
+{% if failuretologin %}
+<div class="alert alert-danger">
+    <ul class="list-unstyled">
+        {{failuretologin}}
+    </ul>
+</div>
+{% endif %}
 {% if success %}
 <div class="alert alert-success">
     <ul class="list-unstyled">

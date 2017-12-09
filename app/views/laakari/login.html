@@ -3,6 +3,13 @@
 <h1>MediHome</h1>
 <h4>Lääkärin kirjautuminen</h4>
 <hr>
+{% if failuretologin %}
+<div class="alert alert-danger">
+    <ul class="list-unstyled">
+        {{failuretologin}}
+    </ul>
+</div>
+{% endif %}
 <form method="POST" action="{{base_path}}/login/d" class="inputFieldCustomWidth">
     <!-- Tekstikenttä käyttäjätunnukselle -->
     <div class="form-group">
