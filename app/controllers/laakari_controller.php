@@ -32,8 +32,6 @@ class Laakaricontroller extends BaseController {
         $hyvHP = Hoitopyynto::find($params['pyynto_id']);
         $hyvHP->laakari_id = self::getCurrentDoctorID();
         $hyvHP->assignDoctor();
-
-
         Redirect::to("/laakari");
     }
 
@@ -43,8 +41,15 @@ class Laakaricontroller extends BaseController {
      */
 
     public static function createInstructions($id) {
-        $muokattavaHoitopyynto = Hoitopyynto::find($id);
-        View::make('laakari/editinstructions.html', array('pyynto' => $muokattavaHoitopyynto));
+        if (Hoitopyynto::find($id) != null) {
+            $muokattavaHoitopyynto = Hoitopyynto::find($id);
+            $idMatch = Hoitopyynto::indexBoundsCheck(self::getCurrentDoctorID(), $muokattavaHoitopyynto->laakari_id);
+            if ($idMatch) {
+                View::make('laakari/editinstructions.html', array('pyynto' => $muokattavaHoitopyynto));
+            }
+        } else {
+            self::index();
+        }
     }
 
     /*
@@ -72,16 +77,15 @@ class Laakaricontroller extends BaseController {
                 View::make('laakari/editOrder.html', array('pyynto' => $hoitopyynto));
             }
         } else {
-            //Paluu indeksiin toistaiseksi ainoa varma tie pois ikuisista rekursiopinoista...
             self::index();
         }
     }
 
     /*
-     * Muista lisätä KAIKKIIN numeroparametrilinkkeihin !!! INDEXOUTOFBOUNDS CHECK !!!
+     * Vain hyväksymättömille hoitopyynnöille -> indeksitarkistusta ei ole edes mahdollista toteuttaa
      */
 
-    public static function previewReport($id) {
+    public static function previewOrder($id) {
         $vapaapyynto = Hoitopyynto::find($id);
         View::make('laakari/readOrder.html', array('pyynto' => $vapaapyynto));
     }

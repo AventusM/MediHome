@@ -61,7 +61,7 @@ $routes->get('/laakari/', 'check_doctor_logged_in', function() {
 });
 
 $routes->get('/laakari/hoitopyynto/:id/read', 'check_doctor_logged_in', function($id) {
-    Laakaricontroller::previewReport($id);
+    Laakaricontroller::previewOrder($id);
 });
 
 $routes->get('/laakari/hoitopyynto/:id/edit', 'check_doctor_logged_in', function($id) {

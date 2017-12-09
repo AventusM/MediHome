@@ -16,7 +16,6 @@ class PotilasController extends BaseController {
     public static function index() {
         $omatHoitopyynnot = Hoitopyynto::findAllForPatient(self::getCurrentPatientID());
         $potilas = Potilas::find(self::getCurrentPatientID());
-//        $potilaanOhjeet = Hoitoohje::findAllForPatient(self::getCurrentPatientID());
         View::make('potilas/index.html', array('pyynnot' => $omatHoitopyynnot, 'petunimi' => $potilas->etunimi, 'psukunimi' => $potilas->sukunimi));
     }
 
@@ -62,6 +61,7 @@ class PotilasController extends BaseController {
                 View::make('potilas/readinstructions.html', array('hoitopyynto' => $hoitopyynto));
             }
         } else {
+            //Viestin lisäys mahdollinen.
             self::index();
         }
     }
@@ -72,8 +72,15 @@ class PotilasController extends BaseController {
      */
 
     public static function destroyThisOrder($id) {
-        $hoitopyynto = Hoitopyynto::find($id);
-        View::make('potilas/destroy.html', array('pyynto' => $hoitopyynto));
+        if (Hoitopyynto::find($id) != null) {
+            $hoitopyynto = Hoitopyynto::find($id);
+            $idMatch = Hoitopyynto::indexBoundsCheck(self::getCurrentPatientID(), $hoitopyynto->potilas_id);
+            if ($idMatch) {
+                View::make('potilas/destroy.html', array('pyynto' => $hoitopyynto));
+            } else {
+                self::index();
+            }
+        }
     }
 
     /*
@@ -138,7 +145,7 @@ class PotilasController extends BaseController {
     public static function destroy($id) {
         $poistettavaHoitopyynto = new Hoitopyynto(array('id' => $id));
         $poistettavaHoitopyynto->destroy();
-        Redirect::to('/potilas');
+        self::index();
     }
 
 }
