@@ -1,6 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>MediHome</h1>
+<hr>
+{% if success %}
+<div class="alert alert-success">
+    <ul class="list-unstyled">
+        {{success}}
+    </ul>
+</div>
+{% endif %}
+
+{% if errors %}
+<div class="alert alert-danger">
+    <ul class="list-unstyled">
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
 <!-- Kaikki lomakkeen elementit form-tagin sisään -->
 <form method="POST" action="{{base_path}}/login" class="inputFieldCustomWidth">
     <!-- Tekstikenttä käyttäjätunnukselle -->
@@ -14,7 +32,7 @@
         <label>Salasana</label>
         <input name="password" class="form-control" type="password">
     </div>
-    <p>Uusi käyttäjä? <a href="#">rekisteröidy</a></p>
+    <p>Uusi käyttäjä? <a href="{{base_path}}/register">rekisteröidy</a></p>
     <button type="submit" class="btn btn-primary btn">Kirjaudu</button>
 </form>
 {% endblock %}

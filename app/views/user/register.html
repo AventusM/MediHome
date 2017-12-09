@@ -1,34 +1,41 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>MediHome</h1>
+<h4>Rekisteröidy</h4>
+<hr>
 <!-- Kaikki lomakkeen elementit form-tagin sisään -->
-<form class="inputFieldCustomWidth">
+<form method="POST" action="{{base_path}}/register" class="inputFieldCustomWidth">
 
     <div class="form-group">
         <label>Etunimi</label>
-        <input class="form-control" type="text">
+        <input name="etunimi" class="form-control" type="text">
     </div>
 
     <div class="form-group">
         <label>Sukunimi</label>
-        <input class="form-control" type="password">
+        <input name="sukunimi" class="form-control" type="text">
     </div>
 
     <div class="form-group">
         <label>Henkilötunnus</label>
-        <input class="form-control" type="password">
+        <input name="hetu" class="form-control" type="text">
     </div>
 
     <div class="form-group">
         <label>Haluttu käyttäjätunnus</label>
-        <input class="form-control" type="password">
+        <input name="username" class="form-control" type="text">
     </div>
 
     <div class="form-group">
         <label>Salasana</label>
-        <input class="form-control" type="password">
+        <input name="password" class="form-control" type="password">
     </div>
 
-    <button type="submit" class="btn btn-primary btn-xs">Rekisteröidy</button>
+    <div class="form-group">
+        <label>Salasana uudestaan</label>
+        <input name="passwordcopy" class="form-control" type="password">
+    </div>
+
+    <button type="submit" class="btn btn-success">Rekisteröidy</button>
 </form>
 {% endblock %}

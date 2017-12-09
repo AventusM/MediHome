@@ -24,20 +24,25 @@ class BaseModel {
         return $errors;
     }
 
-    //TODO - käyttäjän validointi (duplikaatit yms..)
+    //Käyttäjän validointi (duplikaatit yms..)
     public function validate_username($userName) {
         $errors = array();
-        if (strlen($userName) < 5) {
-            $errors[] = 'Käyttäjänimen pituuden oltava vähintään 5 merkkiä';
-        }
         if ($userName == '' || $userName == null) {
             $errors[] = 'Nimi ei saa olla tyhjä';
+        }
+        $foundUser = Potilas::findByUser($userName);
+        if ($foundUser) {
+            $errors[] = 'Käyttäjänimi on jo käytössä';
         }
         return $errors;
     }
 
-    public function validate_password() {
-        
+    public function validate_password($pwKentta1, $pwKentta2) {
+        $errors = array();
+        if ($pwKentta1 != $pwKentta2) {
+            $errors[] = 'Salasanat eivät täsmää, yritä uudelleen';
+        }
+        return $errors;
     }
 
     public function errors() {

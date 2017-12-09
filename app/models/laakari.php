@@ -13,7 +13,7 @@ class Laakari extends BaseModel {
      * riippuen lääkäriolio
      */
 
-    public static function authenticate($inputDoc, $inputPwd) {
+    public static function authenticateLogin($inputDoc, $inputPwd) {
         $query = DB::connection()->prepare('SELECT * FROM Laakari WHERE username=:user AND pass=:pwd LIMIT 1');
         $query->execute(array('user' => $inputDoc, 'pwd' => $inputPwd));
         $row = $query->fetch();
