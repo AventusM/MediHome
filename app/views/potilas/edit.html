@@ -1,6 +1,6 @@
 {% extends "patientBase.html" %}
 {% block content %}
-<h2>Muokkaa aiemmin luomaasi hoitopyyntöä</h2>
+<h3>Muokkaa aiemmin luomaasi hoitopyyntöä</h3>
 {% if errors %}
 <div class="alert alert-danger">
     <ul class="list-unstyled">
@@ -12,7 +12,7 @@
 {% endif %}
 <hr><form method="post" action="{{base_path}}/potilas/hoitopyynto/{{pyynto.id}}">
     <div class="form-group">
-        <label>{{pyynto.oireet}}</label><br><br><hr>
+        <p><b>Päivitettävät oireet:</b> {{pyynto.oireet}}</p><hr>
         <textarea rows="4" cols="50" name="oireet"></textarea>
     </div>
     <button type="submit" class="btn btn-success btn-xs">Päivitä</button>

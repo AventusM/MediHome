@@ -1,15 +1,6 @@
 {% extends "doctorBase.html" %}
 {% block content %}
-<h2>Muokkaa hoito-ohjeita</h2>
-{% if errors %}
-<div class="alert alert-danger">
-    <ul>
-        {% for error in errors %}
-        <li>{{error}}</li>
-        {% endfor %}
-    </ul>
-</div>
-{% endif %}
+<h3>Muokkaa hoito-ohjeita</h3>
 <hr>
 <p><strong>Olemassaolevat hoito-ohjeet: </strong>{{pyynto.ohje}}</p><hr>
 <form method="POST" action="{{base_path}}/laakari/updateinstructions">

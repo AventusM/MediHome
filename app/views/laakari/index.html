@@ -51,9 +51,9 @@
         {% for hpyynto in hyvaksytytHoitopyynnot %}
         <tr>
             <td>{{hpyynto.id}}</td>
-            <td>{{hpyynto.luontipvm}}</td>
+            <td><label class="label label-success">{{hpyynto.luontipvm}}</label></td>
             <td>{{hpyynto.potilas_id}}</td>
-            <td>{{hpyynto.kayntipvm}}</td>
+            <td><label class="label label-success">{{hpyynto.kayntipvm}}</label></td>
             {% if hpyynto.raportti %}
             <td><a class="btn-success btn btn-xs" href="{{base_path}}/laakari/hoitopyynto/raportti/{{hpyynto.id}}">Muokkaa</a></td>
             {% else %}

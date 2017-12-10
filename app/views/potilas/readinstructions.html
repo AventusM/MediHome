@@ -1,4 +1,7 @@
 {% extends "patientBase.html" %}
 {% block content %}
-<p>{{hoitopyynto.ohje}}</p>
+<h3>Hoito-ohjeesi</h3>
+<hr><br/><p><strong>Antamasi oireet: </strong>{{hoitopyynto.oireet}}</p><hr>
+<br/><p><strong>Lääkärin antamat ohjeet: </strong>{{hoitopyynto.ohje}}</p><hr>
+<a class="button-wrapper" href="{{base_path}}/potilas"><button type="submit" class="btn btn-xs">&ensp;Palaa&ensp;</button></a>
 {% endblock %}

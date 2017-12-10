@@ -29,7 +29,7 @@
 
             {% else %}
             <td><label class="label label-danger">Odottaa Lääkärin hyväksyntää</label></td>
-            <td class="text-right"><a class="btn-default btn btn-xs" href="{{base_path}}/potilas/hoitopyynto/{{pyynto.id}}">Päivitä</a></td>
+            <td class="text-right"><a class="btn btn-default btn-xs" href="{{base_path}}/potilas/hoitopyynto/{{pyynto.id}}">Päivitä</a></td>
             <td><a class="btn-danger btn btn-xs" href="{{base_path}}/potilas/hoitopyynto/{{pyynto.id}}/destroy">X</a></td>
             {% endif %}
 
@@ -53,7 +53,7 @@
         {% for pyynto in pyynnot %}
         <tr>
             <td>{{pyynto.id}}</td>
-            <td>{{pyynto.luontipvm}}</td>
+            <td><label class="label label-success">{{pyynto.luontipvm}}</label></td>
             <td>{{pyynto.laakari_id}}</td>
             {% if pyynto.ohje and pyynto.laakari_id %}
             <td><a href="{{base_path}}/potilas/hoitopyynto/{{pyynto.id}}/read" class="btn btn-success btn-xs">Lue</a></td>

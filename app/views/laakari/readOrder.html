@@ -1,5 +1,6 @@
 {% extends "doctorBase.html" %}
 {% block content %}
 <br/><p><strong>Potilaan antamat oireet: </strong>{{pyynto.oireet}}</p><hr>
-<a class="button-wrapper" href="{{base_path}}/laakari"><button type="submit" class="btn btn-default btn-xs">&ensp;Palaa&ensp;</button></a>
+<br/><p><strong>Antamasi ohjeet: </strong>{{pyynto.ohje}}</p><hr>
+<a class="button-wrapper" href="{{base_path}}/laakari"><button type="submit" class="btn btn-xs">&ensp;Palaa&ensp;</button></a>
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends "patientBase.html" %}
 {% block content %}
-<h2>Varmista hoitopyynnön poisto</h2><hr>
+<h3>Varmista hoitopyynnön poisto</h3><hr>
 <form method="post" action="{{base_path}}/potilas/hoitopyynto/{{pyynto.id}}/destroy">
     <button type="submit" class="btn btn-danger btn-xs">Poista</button>
 </form>
