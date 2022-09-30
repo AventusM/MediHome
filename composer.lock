@@ -1,23 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "2449a0b91c829605b973d9d6b0671583",
+    "content-hash": "ffca90e958de7e05ca28398e609a041c",
     "packages": [
         {
             "name": "filp/whoops",
-            "version": "1.1.5",
+            "version": "1.1.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "c982fe62c44798c433229cb0425c61b487cc1883"
+                "reference": "72538eeb70bbfb11964412a3d098d109efd012f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/c982fe62c44798c433229cb0425c61b487cc1883",
-                "reference": "c982fe62c44798c433229cb0425c61b487cc1883",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/72538eeb70bbfb11964412a3d098d109efd012f7",
+                "reference": "72538eeb70bbfb11964412a3d098d109efd012f7",
                 "shasum": ""
             },
             "require": {
@@ -40,7 +40,7 @@
                     "src/deprecated"
                 ]
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -62,7 +62,11 @@
                 "whoops",
                 "zf2"
             ],
-            "time": "2015-03-30 15:26:59"
+            "support": {
+                "issues": "https://github.com/filp/whoops/issues",
+                "source": "https://github.com/filp/whoops/tree/1.1.7"
+            },
+            "time": "2015-06-29T05:42:04+00:00"
         },
         {
             "name": "raveren/kint",
@@ -108,7 +112,7 @@
                 "kint",
                 "php"
             ],
-            "time": "2013-08-12 22:46:16"
+            "time": "2013-08-12T22:46:16+00:00"
         },
         {
             "name": "slim/slim",
@@ -154,37 +158,127 @@
                 "rest",
                 "router"
             ],
-            "time": "2015-03-08 18:41:17"
+            "time": "2015-03-08T18:41:17+00:00"
         },
         {
-            "name": "twig/twig",
-            "version": "v1.18.0",
+            "name": "symfony/polyfill-ctype",
+            "version": "v1.26.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/twigphp/Twig.git",
-                "reference": "4cf7464348e7f9893a93f7096a90b73722be99cf"
+                "url": "https://github.com/symfony/polyfill-ctype.git",
+                "reference": "6fd1b9a79f6e3cf65f9e679b23af304cd9e010d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/4cf7464348e7f9893a93f7096a90b73722be99cf",
-                "reference": "4cf7464348e7f9893a93f7096a90b73722be99cf",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/6fd1b9a79f6e3cf65f9e679b23af304cd9e010d4",
+                "reference": "6fd1b9a79f6e3cf65f9e679b23af304cd9e010d4",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2.4"
+                "php": ">=7.1"
+            },
+            "provide": {
+                "ext-ctype": "*"
+            },
+            "suggest": {
+                "ext-ctype": "For best performance"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.18-dev"
+                    "dev-main": "1.26-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gert de Pagter",
+                    "email": "BackEndTea@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for ctype functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "ctype",
+                "polyfill",
+                "portable"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.26.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-05-24T11:49:31+00:00"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v1.44.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/Twig.git",
+                "reference": "0887422319889e442458e48e2f3d9add1a172ad5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/0887422319889e442458e48e2f3d9add1a172ad5",
+                "reference": "0887422319889e442458e48e2f3d9add1a172ad5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/polyfill-ctype": "^1.8"
+            },
+            "require-dev": {
+                "psr/container": "^1.0",
+                "symfony/phpunit-bridge": "^4.4.9|^5.0.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.44-dev"
                 }
             },
             "autoload": {
                 "psr-0": {
                     "Twig_": "lib/"
+                },
+                "psr-4": {
+                    "Twig\\": "src/"
                 }
             },
-            "notification-url": "http://packagist.org/downloads/",
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -196,28 +290,99 @@
                     "role": "Lead Developer"
                 },
                 {
+                    "name": "Twig Team",
+                    "role": "Contributors"
+                },
+                {
                     "name": "Armin Ronacher",
                     "email": "armin.ronacher@active-4.com",
                     "role": "Project Founder"
-                },
-                {
-                    "name": "Twig Team",
-                    "homepage": "http://twig.sensiolabs.org/contributors",
-                    "role": "Contributors"
                 }
             ],
             "description": "Twig, the flexible, fast, and secure template language for PHP",
-            "homepage": "http://twig.sensiolabs.org",
+            "homepage": "https://twig.symfony.com",
             "keywords": [
                 "templating"
             ],
-            "time": "2015-01-25 17:32:08"
+            "support": {
+                "issues": "https://github.com/twigphp/Twig/issues",
+                "source": "https://github.com/twigphp/Twig/tree/v1.44.7"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/twig/twig",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-09-28T08:38:36+00:00"
+        },
+        {
+            "name": "zeuxisoo/slim-whoops",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zeuxisoo/php-slim-whoops.git",
+                "reference": "da0250b0d1211bd90c5ab7e8cf7c3925e8376095"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zeuxisoo/php-slim-whoops/zipball/da0250b0d1211bd90c5ab7e8cf7c3925e8376095",
+                "reference": "da0250b0d1211bd90c5ab7e8cf7c3925e8376095",
+                "shasum": ""
+            },
+            "require": {
+                "filp/whoops": "1.*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "filp/whoops": "1.*",
+                "phpunit/phpunit": "3.7.*@dev",
+                "slim/slim": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Zeuxisoo\\Whoops\\Provider\\Slim\\WhoopsMiddleware": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Zeuxis Lo",
+                    "email": "seekstudio@gmail.com",
+                    "homepage": "http://www.chair.im/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP whoops error on slim framework",
+            "homepage": "https://github.com/zeuxisoo/php-slim-whoops/",
+            "keywords": [
+                "error",
+                "exception",
+                "slim",
+                "whoops"
+            ],
+            "support": {
+                "issues": "https://github.com/zeuxisoo/php-slim-whoops/issues",
+                "source": "https://github.com/zeuxisoo/php-slim-whoops/tree/0.3.0"
+            },
+            "time": "2014-11-06T06:47:24+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
